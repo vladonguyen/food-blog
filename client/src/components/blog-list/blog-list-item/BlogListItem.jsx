@@ -30,7 +30,7 @@ export default function BlogListItem ({
               </div>
               {/* Content */}
               <div className="blog-content">
-                <Link href={`/blog/${_id}`} className="post-title">
+                <Link to={`/blog/${_id}`} className="post-title">
                   {title}
                 </Link>
                 <div className="meta-data">
