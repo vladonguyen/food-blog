@@ -33,10 +33,15 @@ export default function BlogCreate() {
                     <label htmlFor="desc">Description:</label>
                     <textarea name="desc" id="desc"></textarea>
 
+                    <label htmlFor="articleContent">Article text:</label>
+                    <textarea name="articleContent" id="articleContent"></textarea>
+
                     <label htmlFor="date">Publish date:</label>
 
                     <input type="date" id="date" name="date" />
 
+                    <label htmlFor="authorName">Author name:</label>
+                    <input type="text" id="author-name" name="authorName" placeholder="Enter author" />
                     <input className="btn submit" type="submit" value="Create Post" />
                 </div>
 

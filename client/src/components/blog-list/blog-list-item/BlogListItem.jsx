@@ -7,7 +7,8 @@ export default function BlogListItem ({
     imageUrl,
     desc,
     date,
-    _id
+    _id,
+    authorName
 }) {
 
 
@@ -23,7 +24,7 @@ export default function BlogListItem ({
                 <img src={imageUrl} alt="" />
                 <div className="post-date">
                   <Link to={`/blog/${_id}`}>
-                    <span>05</span>April <br /> 2018
+                  {date}
                   </Link>
                 </div>
               </div>
@@ -33,7 +34,7 @@ export default function BlogListItem ({
                   {title}
                 </Link>
                 <div className="meta-data">
-                  by {username}
+                  by {authorName}
                 
                 </div>
                 <p>
