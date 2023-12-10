@@ -1,5 +1,8 @@
+import './home.css';
+
 import { useEffect, useState } from "react";
 import * as blogService from '../../services/blogService';
+import * as rezepteService from '../../services/rezepteService';
 import RezepteListItem from "./Rezepte-list-item/RezepteListItem";
 import BlogListItem from "./Blog-list-item/BlogListItem";
 import { Link } from "react-router-dom";
@@ -10,6 +13,12 @@ export default function Home(){
   useEffect(()=>{
 blogService.getAll()
 .then(result => setBlogPosts(result));
+  },[]);
+
+  const [rezeptePosts, setRezeptePosts] = useState([]);
+  useEffect(()=>{
+  rezepteService.getAll()
+.then(result => setRezeptePosts(result));
   },[]);
 
 
@@ -44,59 +53,10 @@ blogService.getAll()
             </div>
             <div className="row">
               {/* Single Best Receipe Area */}
-              <div className="col-12 col-sm-6 col-lg-4">
-                <div className="single-best-receipe-area mb-30">
-                  <img src="img/bg-img/r1.jpg" alt="" />
-                  <div className="receipe-content">
-                    <a href="receipe-post.html">
-                      <h5>Sushi Easy Receipy</h5>
-                    </a>
-                    <div className="ratings">
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star-o" aria-hidden="true" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Single Best Receipe Area */}
-              <div className="col-12 col-sm-6 col-lg-4">
-                <div className="single-best-receipe-area mb-30">
-                  <img src="img/bg-img/r2.jpg" alt="" />
-                  <div className="receipe-content">
-                    <a href="receipe-post.html">
-                      <h5>Homemade Burger</h5>
-                    </a>
-                    <div className="ratings">
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star-o" aria-hidden="true" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Single Best Receipe Area */}
-              <div className="col-12 col-sm-6 col-lg-4">
-                <div className="single-best-receipe-area mb-30">
-                  <img src="img/bg-img/r3.jpg" alt="" />
-                  <div className="receipe-content">
-                    <a href="receipe-post.html">
-                      <h5>Vegan Smoothie</h5>
-                    </a>
-                    <div className="ratings">
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star" aria-hidden="true" />
-                      <i className="fa fa-star-o" aria-hidden="true" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {rezeptePosts.map(rezepte => (
+        <RezepteListItem key={rezepte.id} {...rezepte} />
+       ))}
+   
             </div>
           </div>
         </section>
@@ -111,12 +71,9 @@ blogService.getAll()
               <div className="col-12">
                 {/* Cta Content */}
                 <div className="cta-content text-center">
-                  <h2>Gluten Free Receipies</h2>
+                  <h2>Healthy Free Receipies</h2>
                   <p>
-                    Fusce nec ante vitae lacus aliquet vulputate. Donec scelerisque
-                    accumsan molestie. Vestibulum ante ipsum primis in faucibus orci
-                    luctus et ultrices posuere cubilia Curae; Cras sed accumsan neque.
-                    Ut vulputate, lectus vel aliquam congue, risus leo elementum nibh
+                  Healthy free recipes offer a delightful combination of nourishment and taste, providing a diverse range of options for those seeking a balanced lifestyle. These recipes prioritize wholesome ingredients, fostering well-being without compromising on flavor. 
                   </p>
                   <Link to="/rezepte" className="btn delicious-btn">
                     Discover all the receipies
