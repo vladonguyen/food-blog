@@ -56,7 +56,7 @@ export default function RezepteDetails() {
     <div className="row">
       
       <div className="col-12 col-md-8">
-      <div className="owl-item" style={{marginTop:"40px", marginBottom:"40px"}}><img src="http://localhost:5173/img/bg-img/bg5.jpg" alt="" /></div>
+      <div className="owl-item" style={{marginTop:"40px", marginBottom:"40px"}}><img src={rezepte.imageUrl} alt="" /></div>
         <div className="receipe-headline my-5">
           <span>{rezepte.date}</span>
           <h2>{rezepte.title}</h2>

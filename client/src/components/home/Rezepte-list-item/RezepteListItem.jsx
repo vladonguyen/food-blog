@@ -19,14 +19,12 @@ export default function RezepteListItem ({
     return (
     < >   
 
-<div className="col-12 col-lg-6">
-                <div className="single-top-catagory">
-                  {/* Content */}
-                  <div className="top-cta-content">
-                    <h3>{title}</h3>
-                    <h6>by {authorName}</h6>
-                    <Link to={`/rezepte/${_id}`} className="btn delicious-btn">
-                      See Full Article
+<div className="col-12 col-sm-6 col-lg-4">
+                <div className="single-best-receipe-area mb-30">
+                  <img src={imageUrlHome} alt="" />
+                  <div className="receipe-content">
+                    <Link to={`/rezepte/${_id}`} >
+                      <h5>{title}</h5>
                     </Link>
                   </div>
                 </div>

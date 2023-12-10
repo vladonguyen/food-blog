@@ -1704,6 +1704,21 @@
                     "authorName": "Vladimir Nguyen",
                     "_createdOn": 1702166362183,
                     "_id": "3480d41f-21a1-42d5-86d3-8eb0e1322f46"
+                },
+                "2480d41f-21a1-42d5-86d3-8eb0e1322f46":{
+                    "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
+                    "title": "Vegan Smoothie",
+                    "prepTime": "5",
+                    "cookTime": "2",
+                    "servings": "2",
+                    "ingredients": " Chickpeas, onions, garlic, ginger, cumin, coriander, turmeric, garam masala, chili powder, tomatoes",    
+                     "imageUrl": "/img/bg-img/bg3.jpg",
+                     "imageUrlHome": "/img/bg-img/r3.jpg",
+                    "recipeContent": "Introduction\nEmbark on a culinary adventure with the Ultimate Vegan Chickpea Curry – a delightful journey into the heart of plant-based goodness. Bursting with rich flavors, aromatic spices, and wholesome ingredients, this curry is a celebration of vegan cuisine that promises to tantalize your taste buds. In this article, we will explore the magic behind this delectable dish, from its vibrant ingredients to the step-by-step preparation that makes it a favorite among those seeking a delicious and nutritious plant-based meal.\n\nThe Allure of Vegan Chickpea Curry\nAs plant-based lifestyles gain momentum, so does the appreciation for dishes that showcase the versatility and deliciousness of plant-derived ingredients. The Vegan Chickpea Curry is a shining example, bringing together the humble chickpea with an array of spices and vegetables to create a savory masterpiece.\n\nCrafting the Ultimate Vegan Chickpea Curry\nIngredients:\nChickpeas: A can of cooked chickpeas forms the hearty base of this curry.\n\nAromatics: Onions, garlic, and ginger form the flavor-packed trio that lays the foundation for a fragrant curry.\n\nSpices: A blend of cumin, coriander, turmeric, garam masala, and chili powder creates a symphony of spices that elevates the dish.\n\nTomatoes: Fresh or canned tomatoes provide a luscious base and acidity to balance the flavors.\n\nCoconut Milk: Creamy coconut milk adds richness and depth to the curry.\n\nVegetables: Customize your curry with a medley of vegetables such as spinach, bell peppers, and peas.\n\nFresh Herbs: Garnish with fresh cilantro or parsley for a burst of freshness.\n\nPreparation:\nSauté Aromatics: In a pan, sauté finely chopped onions, garlic, and ginger until golden brown.\n\nSpice Infusion: Add the spice blend and let it bloom in the aromatic base, releasing a fragrant symphony of flavors.\n\nTomato Magic: Incorporate diced tomatoes, cooking until they break down into a thick, flavorful sauce.\n\nChickpea Harmony: Introduce the chickpeas to the pot, allowing them to absorb the aromatic goodness.\n\nCreamy Indulgence: Pour in coconut milk, bringing a creamy and luxurious texture to the curry.\n\nVeggie Medley: Add your favorite vegetables, allowing them to cook until tender yet vibrant.\n\nHerbal Elegance: Finish with a generous sprinkle of fresh herbs, imparting a burst of color and freshness to the curry.\n\nWhy the Ultimate Vegan Chickpea Curry?\n1. Nutrient-Rich Goodness:\nProtein Power: Chickpeas are a rich source of plant-based protein, making this curry a satisfying and nutritious choice.\n\nVitamins and Minerals: Packed with vitamins and minerals from a variety of vegetables, promoting overall well-being.\n\n2. Flavor Explosion:\nSpice Harmony: The carefully curated blend of spices creates a symphony of flavors that dance on your palate.\n\nCustomizable: Adapt the recipe to your taste preferences by adding your favorite vegetables or adjusting spice levels.\n\n3. Vegan Delight:\nPlant-Powered: Celebrate the versatility and deliciousness of plant-based ingredients without compromising on taste.",
+                    "date": "2023-12-10",
+                    "authorName": "Vladimir Nguyen",
+                    "_createdOn": 1702166362183,
+                    "_id": "2480d41f-21a1-42d5-86d3-8eb0e1322f46"
                 }
             }
     };
