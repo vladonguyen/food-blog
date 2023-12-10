@@ -16,6 +16,10 @@ import Logout from "./components/logout/Logout";
 import Register from './components/register/Register'
 import BlogDetails from './components/blog-details/BlogDetails'
 import Footer from "./components/footer/Footer";
+import RezepteDetails from './components/rezepte-details/RezepteDetails';
+import RezepteCreate from './components/rezepte-create/RezepteCreate';
+import RezepteList from './components/rezepte-list/RezepteList';
+
 
 
 
@@ -30,11 +34,17 @@ function App() {
   });
 
   const loginSubmitHandler = async (values) => {
-    const result = await authService.login(values.email, values.password);
+    try {
+      const result = await authService.login(values.email, values.password);
     console.log(result);
     setAuth(result);
     localStorage.setItem('accessToken', result.accessToken);
     navigate(Path.Home)
+    } catch (error) {
+      return alert(error.message);
+
+    }
+    
   }
 
   const registerSubmitHandler = async (values) => {
@@ -52,6 +62,8 @@ function App() {
 
   }
 
+  
+
   const values = {
     loginSubmitHandler,
     registerSubmitHandler,
@@ -60,6 +72,8 @@ function App() {
     email: auth.email,
     isAuthenticated: !!auth.accessToken,
   }
+
+
   return (
     <AuthContext.Provider value={values}>
       <div id="box">
@@ -71,6 +85,9 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/blog/:blogId' element={<BlogDetails />} />
+          <Route path='/rezepte' element={<RezepteList />} />
+          <Route path='/rezepte/:rezepteId' element={<RezepteDetails />} />
+          <Route path='/rezepte/create' element={<RezepteCreate />} />
           <Route path={Path.Logout} element={<Logout />} />
         </Routes>
         <Footer />

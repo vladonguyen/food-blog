@@ -1333,7 +1333,12 @@
     			email: "admin@abv.bg",
     			username: "Admin",
     			hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
-    		}
+    		},
+            "c36c72f4-4c25-4aae-b3bc-49272a7994a1": {
+    			email: "vladonguyen@gmail.com",
+    			username: "Vladimir",
+    			hashedPassword: "f9556d736ca8f50a3ad91a008a572299bfeb2717a63a7569315ff7e1ba05396a"
+    		},
     	},
     	sessions: {
     	}
@@ -1642,7 +1647,60 @@
     			_createdOn: 1616237272948,
     			_updatedOn: 1616237293676
     		}
-    	}
+    	},
+        blog:{
+            "240c440a-bca5-45be-b987-1fea1a433ebd":   {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "title": "HOW TO START A FOOD BLOG",
+                "imageUrl": "https://miro.medium.com/v2/resize:fit:550/1*ElUNWlNKjnhD1JCdxdNz6w.jpeg",
+                "desc": "My blog as of jan 2022 is hosted on Bigscoots. Before that Nov 2017 onwards was hosted on WP Engine. Before that it was hosted on Bluehost servers for many years with a self-hosted WordPress engine and it uses Foodie theme. Do not worry if these words do not mean much. I did not know them too. And that is why I wanted to write this post. Read on.",
+                "articleContent": "My blog as of jan 2022 is hosted on Bigscoots. Before that Nov 2017 onwards was hosted on WP Engine. Before that it was hosted on Bluehost servers for many years with a self-hosted WordPress engine and it uses Foodie theme. Do not worry if these words do not mean much. I did not know them too. And that is why I wanted to write this post. Read on.\n\nI started my blog on blogger.com as that is what I knew about at the time. I was blogging infrequently, taking bad pictures and the recipes were written in any which way I felt like. Fast forward to some years down the line, when I started taking better pictures, when readers started finding me online, started cooking my food. In those years, I learnt to write better, learnt to develop recipes better, learnt photography all by myself and was often faced with the question of sticking it out on blogger or moving to wordpress. Eventually I moved to self hosted wordpress in 2014. Yes, before that it was all blogger.\n\nWhether you want to start a blog to post food, thoughts, other interests, whether you want to keep is small and personal or make a larger responsive website to reach a larger audience, you can do it much more easily now with numerous options available.",
+                "date": "2023-12-09",
+                "authorName": "Gabriela Ilieva",
+                "_createdOn": 1702087783862,
+                "_id": "240c440a-bca5-45be-b987-1fea1a433ebd"
+            },
+            "140c440a-bca5-45be-b987-1fea1a433ebd":   {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "title": "How to Go Vegan Easily and Healthily",
+                "imageUrl": "https://images.everydayhealth.com/images/what-is-a-vegan-diet-benefits-food-list-beginners-guide-alt-1440x810.jpg?sfvrsn=1d260c85_1",
+                "desc": "This guide explains how to go vegan with minimal effort, in a lasting and healthy way. I’ve followed a vegan diet for more than thirty years, so I can offer tons of useful advice. By the time you finish reading, you’ll know exactly how to move forward.                ",
+                "articleContent": "Go about things the wrong way, and your vegan transition will demand massive willpower and struggle. This happens when you cut a bunch of non-vegan foods out of your diet, without having anything ready to eat instead. You’ll end up trying replacements you don’t like, having non-fulfilling meals, and generally feeling dissatisfied with your new diet.\n\nOr you can take the easy approach, which requires no sacrifice whatsoever.\n\nHere’s all you need to do to have an enjoyable and effortless transition: don’t seek to cut animal products out of your diet—instead, crowd them out.",
+                "date": "2023-12-09",
+                "authorName": "Gabriela Ilieva",
+                "_createdOn": 1702087783862,
+                "_id": "140c440a-bca5-45be-b987-1fea1a433ebd"
+            }
+            },
+            rezepte:{
+                "ac533703-b042-4785-baf7-aa4d8689d6f4":  {
+                    "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
+                    "title": "Perfect Vegan Cheese Salad",
+                    "prepTime": "15",
+                    "cookTime": "10",
+                    "servings": "2",
+                    "ingredients": "Leafy greens, colorful vegetables, vegan cheese, protein boosters, nuts, sunflower or pumpkin seeds",
+                    "imageUrl": "http://localhost:5173/img/bg-img/bg5.jpg",
+                    "recipeContent": "Ingredients:\nLeafy Greens: Start with a base of fresh and crisp leafy greens like spinach, kale, or arugula.\n\nColorful Vegetables: Add a burst of color and nutrients with a mix of cherry tomatoes, bell peppers, cucumber, and shredded carrots.\n\nVegan Cheese: Choose your favorite vegan cheese or experiment with homemade varieties made from cashews, almonds, or soy.\n\nProtein Boosters: Elevate your salad with protein-rich additions like chickpeas, quinoa, or marinated tofu.\n\nNuts and Seeds: Sprinkle a handful of roasted nuts (walnuts, almonds, or pine nuts) and seeds (sunflower or pumpkin seeds) for added crunch.\n\nDressing: Create a tangy and flavorful dressing using olive oil, balsamic vinegar, Dijon mustard, and a touch of agave syrup.\n\nPreparation:\nWash and Chop: Rinse the leafy greens and chop the vegetables into bite-sized pieces.\n\nCheese Magic: Cube or crumble your chosen vegan cheese and distribute it evenly throughout the salad.\n\nProtein Power: Cook and prepare your chosen protein booster. For tofu, marinate it with your favorite flavors before pan-searing until golden.\n\nNutty Crunch: Toast the nuts and seeds in a dry pan for a few minutes until fragrant, then sprinkle them over the salad.\n\nDress to Impress: Whisk together the dressing ingredients and drizzle it over the salad just before serving.",
+                    "date": "",
+                    "authorName": "Vladimir Nguyen",
+                    "_createdOn": 1702166129265,
+                    "_id": "ac533703-b042-4785-baf7-aa4d8689d6f4"
+                },
+                "3480d41f-21a1-42d5-86d3-8eb0e1322f46":{
+                    "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
+                    "title": "Vegan Chickpea Curry",
+                    "prepTime": "15",
+                    "cookTime": "10",
+                    "servings": "2",
+                    "ingredients": " Chickpeas, onions, garlic, ginger, cumin, coriander, turmeric, garam masala, chili powder, tomatoes",                   "imageUrl": "http://localhost:5173/img/bg-img/bg2.jpg",
+                    "recipeContent": "Introduction\nEmbark on a culinary adventure with the Ultimate Vegan Chickpea Curry – a delightful journey into the heart of plant-based goodness. Bursting with rich flavors, aromatic spices, and wholesome ingredients, this curry is a celebration of vegan cuisine that promises to tantalize your taste buds. In this article, we will explore the magic behind this delectable dish, from its vibrant ingredients to the step-by-step preparation that makes it a favorite among those seeking a delicious and nutritious plant-based meal.\n\nThe Allure of Vegan Chickpea Curry\nAs plant-based lifestyles gain momentum, so does the appreciation for dishes that showcase the versatility and deliciousness of plant-derived ingredients. The Vegan Chickpea Curry is a shining example, bringing together the humble chickpea with an array of spices and vegetables to create a savory masterpiece.\n\nCrafting the Ultimate Vegan Chickpea Curry\nIngredients:\nChickpeas: A can of cooked chickpeas forms the hearty base of this curry.\n\nAromatics: Onions, garlic, and ginger form the flavor-packed trio that lays the foundation for a fragrant curry.\n\nSpices: A blend of cumin, coriander, turmeric, garam masala, and chili powder creates a symphony of spices that elevates the dish.\n\nTomatoes: Fresh or canned tomatoes provide a luscious base and acidity to balance the flavors.\n\nCoconut Milk: Creamy coconut milk adds richness and depth to the curry.\n\nVegetables: Customize your curry with a medley of vegetables such as spinach, bell peppers, and peas.\n\nFresh Herbs: Garnish with fresh cilantro or parsley for a burst of freshness.\n\nPreparation:\nSauté Aromatics: In a pan, sauté finely chopped onions, garlic, and ginger until golden brown.\n\nSpice Infusion: Add the spice blend and let it bloom in the aromatic base, releasing a fragrant symphony of flavors.\n\nTomato Magic: Incorporate diced tomatoes, cooking until they break down into a thick, flavorful sauce.\n\nChickpea Harmony: Introduce the chickpeas to the pot, allowing them to absorb the aromatic goodness.\n\nCreamy Indulgence: Pour in coconut milk, bringing a creamy and luxurious texture to the curry.\n\nVeggie Medley: Add your favorite vegetables, allowing them to cook until tender yet vibrant.\n\nHerbal Elegance: Finish with a generous sprinkle of fresh herbs, imparting a burst of color and freshness to the curry.\n\nWhy the Ultimate Vegan Chickpea Curry?\n1. Nutrient-Rich Goodness:\nProtein Power: Chickpeas are a rich source of plant-based protein, making this curry a satisfying and nutritious choice.\n\nVitamins and Minerals: Packed with vitamins and minerals from a variety of vegetables, promoting overall well-being.\n\n2. Flavor Explosion:\nSpice Harmony: The carefully curated blend of spices creates a symphony of flavors that dance on your palate.\n\nCustomizable: Adapt the recipe to your taste preferences by adding your favorite vegetables or adjusting spice levels.\n\n3. Vegan Delight:\nPlant-Powered: Celebrate the versatility and deliciousness of plant-based ingredients without compromising on taste.",
+                    "date": "2023-12-10",
+                    "authorName": "Vladimir Nguyen",
+                    "_createdOn": 1702166362183,
+                    "_id": "3480d41f-21a1-42d5-86d3-8eb0e1322f46"
+                }
+            }
     };
     var rules$1 = {
     	users: {

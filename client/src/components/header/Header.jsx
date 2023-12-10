@@ -94,10 +94,16 @@ export default function Header(){
                      <li>
                      <Link to="/blog">Blog</Link>                       {/* Removed the <ul> with class "dropdown" here */}
                      </li>
+                     <li>
+                     <Link to="/rezepte">Recipes</Link>                       {/* Removed the <ul> with class "dropdown" here */}
+                     </li>
                      {isAuthenticated && (
                     <>
                      <li>
                     <Link to="/blog/create">Create post</Link>
+                    </li>
+                    <li>
+                    <Link to="/rezepte/create">Create receipe</Link>
                     </li>
                     <li>
                     <Link to="/logout">Logout</Link>
