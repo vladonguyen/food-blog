@@ -11,13 +11,13 @@ export default function Home(){
 
   const [blogPosts, setBlogPosts] = useState([]);
   useEffect(()=>{
-blogService.getAll()
+blogService.getLastTwo()
 .then(result => setBlogPosts(result));
   },[]);
 
   const [rezeptePosts, setRezeptePosts] = useState([]);
   useEffect(()=>{
-  rezepteService.getAll()
+  rezepteService.getLastSix()
 .then(result => setRezeptePosts(result));
   },[]);
 
@@ -71,7 +71,7 @@ blogService.getAll()
               <div className="col-12">
                 {/* Cta Content */}
                 <div className="cta-content text-center">
-                  <h2>Healthy Free Receipies</h2>
+                  <h2>Healthy Free Recipes</h2>
                   <p>
                   Healthy free recipes offer a delightful combination of nourishment and taste, providing a diverse range of options for those seeking a balanced lifestyle. These recipes prioritize wholesome ingredients, fostering well-being without compromising on flavor. 
                   </p>

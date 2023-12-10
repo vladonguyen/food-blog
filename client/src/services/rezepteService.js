@@ -8,6 +8,12 @@ const result = await request.get(baseUrl);
 return result;
 };
 
+export const getLastSix = async () => {
+    const result = await request.get(`${baseUrl}?sortBy=date&pageSize=6`);
+    console.log(result)
+    return result;
+    };
+
 export const getOne = async (rezepteId) => {
     const result = await request.get(`${baseUrl}/${rezepteId}`);
 
