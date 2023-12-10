@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer(){
     return(
         <footer className="footer-area">
@@ -27,9 +29,9 @@ export default function Footer(){
           </div>
           {/* Footer Logo */}
           <div className="footer-logo">
-            <a href="index.html">
+            <Link to="/">
               <img src="img/core-img/logo.png" alt="" />
-            </a>
+            </Link>
           </div>
           {/* Copywrite */}
           <p>

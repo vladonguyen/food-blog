@@ -139,9 +139,9 @@ export default function Header(){
                      </li> */}
                    </ul>
                    {/* Newsletter Form */}
-                   <div className="search-btn">
+                   {/* <div className="search-btn">
                      <i className="fa fa-search" aria-hidden="true" />
-                   </div>
+                   </div> */}
                  </div>
                  {/* Nav End */}
                </div>
