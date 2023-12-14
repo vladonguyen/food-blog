@@ -1435,7 +1435,7 @@
                 "desc": "My blog as of jan 2022 is hosted on Bigscoots. Before that Nov 2017 onwards was hosted on WP Engine. Before that it was hosted on Bluehost servers for many years with a self-hosted WordPress engine and it uses Foodie theme. Do not worry if these words do not mean much. I did not know them too. And that is why I wanted to write this post. Read on.",
                 "articleContent": "My blog as of jan 2022 is hosted on Bigscoots. Before that Nov 2017 onwards was hosted on WP Engine. Before that it was hosted on Bluehost servers for many years with a self-hosted WordPress engine and it uses Foodie theme. Do not worry if these words do not mean much. I did not know them too. And that is why I wanted to write this post. Read on.\n\nI started my blog on blogger.com as that is what I knew about at the time. I was blogging infrequently, taking bad pictures and the recipes were written in any which way I felt like. Fast forward to some years down the line, when I started taking better pictures, when readers started finding me online, started cooking my food. In those years, I learnt to write better, learnt to develop recipes better, learnt photography all by myself and was often faced with the question of sticking it out on blogger or moving to wordpress. Eventually I moved to self hosted wordpress in 2014. Yes, before that it was all blogger.\n\nWhether you want to start a blog to post food, thoughts, other interests, whether you want to keep is small and personal or make a larger responsive website to reach a larger audience, you can do it much more easily now with numerous options available.",
                 "date": "2023-12-09",
-                "authorName": "Gabriela Ilieva",
+                "authorName": "Peter Lee",
                 "_createdOn": 1702087783862,
                 "_id": "240c440a-bca5-45be-b987-1fea1a433ebd"
             },
@@ -1447,7 +1447,7 @@
                 "desc": "This guide explains how to go vegan with minimal effort, in a lasting and healthy way. I’ve followed a vegan diet for more than thirty years, so I can offer tons of useful advice. By the time you finish reading, you’ll know exactly how to move forward.                ",
                 "articleContent": "Go about things the wrong way, and your vegan transition will demand massive willpower and struggle. This happens when you cut a bunch of non-vegan foods out of your diet, without having anything ready to eat instead. You’ll end up trying replacements you don’t like, having non-fulfilling meals, and generally feeling dissatisfied with your new diet.\n\nOr you can take the easy approach, which requires no sacrifice whatsoever.\n\nHere’s all you need to do to have an enjoyable and effortless transition: don’t seek to cut animal products out of your diet—instead, crowd them out.",
                 "date": "2023-12-09",
-                "authorName": "Gabriela Ilieva",
+                "authorName": "Peter Lee",
                 "_createdOn": 1702087783862,
                 "_id": "140c440a-bca5-45be-b987-1fea1a433ebd"
             }

@@ -1,22 +1,69 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useMemo, useReducer, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as blogService from '../../services/blogService';
 import * as commentService from '../../services/commentService';
 import AuthContext from "../../context/authContext";
+import reducer from "./commentReducer";
+import useForm from "../../hooks/useForms";
+import { pathToUrl } from "../utils/pathUtils";
+import Path from "../../paths";
+import BlogEdit from "../blog-edit/BlogEdit";
+
 
 
 export default function blogDetails() {
-    const {email} = useContext(AuthContext);
-    const {owner} = useContext(AuthContext);
+    const {email, userId} = useContext(AuthContext);
     const [blog, setBlog] = useState({});
+    const {owner} = useContext(AuthContext);
+    // const [comments, dispatch] = useReducer(reducer, [])
     const { blogId } = useParams();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
         blogService.getOne(blogId)
             .then(setBlog);
+
+            // commentService.getAll(blogId)
+            // .then((result)=> {
+            //     dispatch({
+            //         type: 'GET_ALL_COMMENTS',
+            //         payload: result,
+            //     })
+            // });
           
     }, [blogId]);
+
+  //   const addCommentHandler = async (values) => {
+
+  //     const newComment = await commentService.create(
+  //         blogId,
+  //         values.comment
+  //     );
+
+  //         newComment.owner = {email};
+
+  //         dispatch({
+  //             type: 'ADD_COMMENT',
+  //             payload: newComment
+  //         });
+          
+  // }
+
+const deleteButtonClickHandler = async ()=>{
+const hasConfirmed = confirm(`Are you sure you want to delete ${blog.title}`);
+if(hasConfirmed){
+await   blogService.remove(blogId);
+navigate('/blog');
+}
+
+}
+
+  const initialValues = useMemo(()=>({
+      comment:'',
+  }), []);
+
+  const {values, onChange, onSubmit} = useForm(initialValues);
 
     return (
        
@@ -70,16 +117,17 @@ export default function blogDetails() {
                 <p>
                  {blog.articleContent}
                 </p>
-               
+                {userId === blog._ownerId && (
+ <div className="buttons">
+ <Link to={pathToUrl(Path.BlogEdit, {blogId})} className="button">Edit</Link>
+ <button  className="button" onClick={deleteButtonClickHandler}>Delete</button>
+</div>
+)};
               </div>
             </div>
                 
 
-                {/* <!-- Edit/Delete buttons ( Only for creator of this blog )  -->
-                <div className="buttons">
-                    <a href="#" className="button">Edit</a>
-                    <a href="#" className="button">Delete</a>
-                </div> */}
+       
 
 </div>
           

@@ -42,6 +42,7 @@ export default function BlogCreate() {
 
                     <label htmlFor="authorName">Author name:</label>
                     <input type="text" id="author-name" name="authorName" placeholder="Enter author" />
+                    
                     <input className="btn submit" type="submit" value="Create Post" />
                 </div>
 

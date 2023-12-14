@@ -29,3 +29,14 @@ export const create = async (blogData) => {
     return result
 }
 
+export const edit = async (blogId, blogData) => {
+    const result = await request.put(`${baseUrl}/${blogId}`, blogData);
+
+    return result;
+}
+
+export const remove = async (blogId) => {
+    const result =   request.remove(`${baseUrl}/${blogId}`);
+  
+      return result;
+  }
