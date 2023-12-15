@@ -30,6 +30,9 @@ export default function BlogCreate() {
                     <label htmlFor="imageUrl">Image:</label>
                     <input type="text" id="imageUrl" name="imageUrl" placeholder="Give photo url..." />
 
+                    <label htmlFor="imageUrlHome">Image:</label>
+                    <input type="text" id="imageUrlHome" name="imageUrlHome" placeholder="Give home photo url..." />
+
                     <label htmlFor="desc">Description:</label>
                     <textarea name="desc" id="desc"></textarea>
 

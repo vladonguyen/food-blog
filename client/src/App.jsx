@@ -23,6 +23,7 @@ import RezepteCreate from './components/rezepte-create/RezepteCreate';
 import RezepteList from './components/rezepte-list/RezepteList';
 import AuthGuard from './components/guards/AuthGuards';
 import BlogEdit from './components/blog-edit/BlogEdit';
+import RezepteEdit from './components/rezepte-edit/RezepteEdit';
 
 
 
@@ -33,6 +34,15 @@ import BlogEdit from './components/blog-edit/BlogEdit';
 
 function App() {
  
+  function clearLocalStorage(){
+    let firstTime= 1;
+    if(firstTime = 1){
+        localStorage.removeItem('accessToken', 'auth');
+        firstTime++;
+    }
+}
+
+clearLocalStorage();
 
 
   return (
@@ -53,6 +63,7 @@ function App() {
           <Route path='/blog/create' element={<BlogCreate />} />
 <Route path={Path.BlogEdit} element={<BlogEdit />} />
 <Route path='/rezepte/create' element={<RezepteCreate />} />
+<Route path={Path.RezepteEdit} element={<RezepteEdit />} />
           <Route path={Path.Logout} element={<Logout />} />
           </Route>
         </Routes>

@@ -7,9 +7,6 @@ export default function RezepteCreate() {
     const createRezepteSubmitHandler = async (e) => {
        
         e.preventDefault();
-   
-        
-      
 
         const rezepteData = Object.fromEntries(new FormData(e.currentTarget));
         try {
@@ -47,6 +44,9 @@ export default function RezepteCreate() {
                     <label htmlFor="imageUrl">Image:</label>
                     <input type="text" id="imageUrl" name="imageUrl" placeholder="Give photo url..." />
 
+                    <label htmlFor="imageUrlHome">Image:</label>
+                    <input type="text" id="imageUrlHome" name="imageUrlHome" placeholder="Give home photo url..." />
+
 
                     <label htmlFor="recipeContent">Recipe content:</label>
                     <textarea name="recipeContent" id="recipeContent"></textarea>
@@ -59,7 +59,8 @@ export default function RezepteCreate() {
 
                     <label htmlFor="authorName">Author name:</label>
                     <input type="text" id="author-name" name="authorName" placeholder="Enter author" />
-                    <input className="btn submit" type="submit" value="Create Post" />
+
+                    <input className="btn submit" type="submit" value="Create Recipe" />
 
                    
                 </div>

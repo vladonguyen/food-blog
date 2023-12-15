@@ -3,7 +3,7 @@ import * as request  from "../lib/request";
 const baseUrl = 'http://localhost:3030/data/rezepte'
 
 export const getAll = async () => {
-const result = await request.get(baseUrl);
+const result = await request.get(`${baseUrl}?sortBy=date`);
 
 return result;
 };
@@ -28,5 +28,14 @@ export const create = async (rezepteData) => {
     return result;
 }
 
+export const edit = async (rezepteId, rezepteData) => {
+    const result = await request.put(`${baseUrl}/${rezepteId}`, rezepteData);
 
+    return result;
+}
 
+export const remove = async (rezepteId) => {
+    const result =   request.remove(`${baseUrl}/${rezepteId}`);
+  
+      return result;
+  }

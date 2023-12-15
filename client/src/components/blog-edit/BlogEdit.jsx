@@ -10,7 +10,9 @@ export default function BlogEdit(){
         category: '',
         maxLevel: '',
         imageUrl: '',
+        imageUrlHome: '',
         summary: '',
+        
     });
     useEffect(()=> {
         blogService.getOne(blogId)
@@ -47,20 +49,7 @@ console.log(values)
             <div className="container">
 
                 <h1>Edit Blog</h1>
-                {/* <label htmlFor="leg-title">Legendary title:</label>
-                <input type="text" id="title" name="title" value={blog.title} onChange={onChange}  placeholder="Enter blog title..." />
 
-                <label htmlFor="category">Category:</label>
-                <input type="text" id="category" name="category" value={blog.category}  onChange={onChange} placeholder="Enter blog category..." />
-
-                <label htmlFor="levels">MaxLevel:</label>
-                <input type="number" id="maxLevel" name="maxLevel" value={blog.maxLevel} onChange={onChange} min="1"placeholder="1" />
-
-                <label htmlFor="blog-img">Image:</label>
-                <input type="text" id="imageUrl" name="imageUrl" value={blog.placeholder} onChange={onChange} placeholder="Upload a photo..." />
-
-                <label htmlFor="summary">Summary:</label>
-                <textarea name="summary" id="summary" value={blog.summary} onChange={onChange}></textarea> */}
 
 
 <h1>Create Post</h1>
@@ -70,6 +59,10 @@ console.log(values)
 
                     <label htmlFor="imageUrl">Image:</label>
                     <input type="text" id="imageUrl" name="imageUrl" placeholder="Give photo url..." value={blog.imageUrl} onChange={onChange}/>
+
+                    <label htmlFor="imageUrl">Image:</label>
+                    <input type="text" id="imageUrlHome" name="imageUrlHome" placeholder="Give home photo url..." value={blog.imageUrlHome} onChange={onChange}/>
+
 
                     <label htmlFor="desc">Description:</label>
                     <textarea name="desc" id="desc" value={blog.desc} onChange={onChange}></textarea>

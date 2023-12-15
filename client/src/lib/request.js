@@ -1,3 +1,5 @@
+import logoutHandler from '../context/authContext';
+
 const buildOptions = (data) => {
 const options = {};
 
@@ -30,6 +32,13 @@ const response = await fetch(url, {
     method,
 });
 if(response.status === 204){
+    return {};
+}
+
+if(response.status === 403){
+    //if accessToken is manually removed from localStorage or token is left from previous session after server restart, 
+    // this will remove auth key too, so no problem with logout
+    localStorage.removeItem('auth');
     return {};
 }
 

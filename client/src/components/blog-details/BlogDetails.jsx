@@ -122,7 +122,7 @@ navigate('/blog');
  <Link to={pathToUrl(Path.BlogEdit, {blogId})} className="button">Edit</Link>
  <button  className="button" onClick={deleteButtonClickHandler}>Delete</button>
 </div>
-)};
+)}
               </div>
             </div>
                 

@@ -1,25 +1,68 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useMemo, useReducer, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as rezepteService from '../../services/rezepteService';
 import * as commentService from '../../services/commentService';
 import AuthContext from "../../context/authContext";
+import reducer from "./commentReducer";
+import useForm from "../../hooks/useForms";
+import { pathToUrl } from "../utils/pathUtils";
+import Path from "../../paths";
+import RezepteEdit from "../rezepte-edit/RezepteEdit";
 
 
-export default function RezepteDetails() {
-    const {email} = useContext(AuthContext);
-    const {owner} = useContext(AuthContext);
-    const [rezepte, setRezepte] = useState({});
-  
-    const { rezepteId } = useParams();
+export default function rezepteDetails() {
+  const {email, userId} = useContext(AuthContext);
+  const [rezepte, setRezepte] = useState({});
+  const {owner} = useContext(AuthContext);
+  // const [comments, dispatch] = useReducer(reducer, [])
+  const { rezepteId } = useParams();
+  const navigate = useNavigate();
 
 
-    useEffect(() => {
-        rezepteService.getOne(rezepteId)
-            .then(setRezepte);
+  useEffect(() => {
+      rezepteService.getOne(rezepteId)
+          .then(setRezepte);
 
-          
-    }, [rezepteId]);
+          // commentService.getAll(rezepteId)
+          // .then((result)=> {
+          //     dispatch({
+          //         type: 'GET_ALL_COMMENTS',
+          //         payload: result,
+          //     })
+          // });
+        
+  }, [rezepteId]);
 
+//   const addCommentHandler = async (values) => {
+
+//     const newComment = await commentService.create(
+//         rezepteId,
+//         values.comment
+//     );
+
+//         newComment.owner = {email};
+
+//         dispatch({
+//             type: 'ADD_COMMENT',
+//             payload: newComment
+//         });
+        
+// }
+
+const deleteButtonClickHandler = async ()=>{
+const hasConfirmed = confirm(`Are you sure you want to delete ${rezepte.title}`);
+if(hasConfirmed){
+await   rezepteService.remove(rezepteId);
+navigate('/rezepte');
+}
+
+}
+
+const initialValues = useMemo(()=>({
+    comment:'',
+}), []);
+
+const {values, onChange, onSubmit} = useForm(initialValues);
     
     
 
@@ -78,6 +121,12 @@ export default function RezepteDetails() {
           <p>
           {rezepte.recipeContent}
           </p>
+          {userId === rezepte._ownerId && (
+ <div className="buttons">
+ <Link to={pathToUrl(Path.RezepteEdit, {rezepteId})} className="button">Edit</Link>
+ <button  className="button" onClick={deleteButtonClickHandler}>Delete</button>
+</div>
+)}
         </div>
 
       </div>
@@ -107,63 +156,7 @@ export default function RezepteDetails() {
         </div>
       </div>
     </div>
-    {/* <div className="row">
-      <div className="col-12">
-        <div className="section-heading text-left">
-          <h3>Leave a comment</h3>
-        </div>
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-12">
-        <div className="contact-form-area">
-          <form action="#" method="post">
-            <div className="row">
-              <div className="col-12 col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  placeholder="Name"
-                />
-              </div>
-              <div className="col-12 col-lg-6">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  placeholder="E-mail"
-                />
-              </div>
-              <div className="col-12">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="subject"
-                  placeholder="Subject"
-                />
-              </div>
-              <div className="col-12">
-                <textarea
-                  name="message"
-                  className="form-control"
-                  id="message"
-                  cols={30}
-                  rows={10}
-                  placeholder="Message"
-                  defaultValue={""}
-                />
-              </div>
-              <div className="col-12">
-                <button className="btn delicious-btn mt-30" type="submit">
-                  Post Comments
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div> */}
+    
   </div>
 </div>
       
