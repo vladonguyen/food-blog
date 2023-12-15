@@ -26,28 +26,39 @@ if(token){
 
 
  const request = async (method, url, data) => {
+    try {
+        const response = await fetch(url, {
+            ...buildOptions(data),
+            method,
+        });
+        if(response.status === 204){
+            return {};
+        }
+        
+        if(response.status === 403){
+            const errorMessage = await response.text();
+            if(errorMessage.includes('User session does not exist')){
+                return {};
+            }else{
+                throw new Error(errorMessage);
+            }
+            
+        }
+        
+        const result = await response.json();
+        
+        if(!response.ok){
+            throw result;
+        }
+        return result;
 
-const response = await fetch(url, {
-    ...buildOptions(data),
-    method,
-});
-if(response.status === 204){
-    return {};
-}
+    } catch (error) {
+        
+        console.log(error.message);
+        throw error; 
+    }
 
-if(response.status === 403){
-    //if accessToken is manually removed from localStorage or token is left from previous session after server restart, 
-    // this will remove auth key too, so no problem with logout
-    localStorage.removeItem('auth');
-    return {};
-}
 
-const result = await response.json();
-
-if(!response.ok){
-    throw result;
-}
-return result;
 }
 
 export const get =  request.bind(null, 'GET');

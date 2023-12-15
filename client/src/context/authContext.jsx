@@ -19,11 +19,18 @@ export const AuthProvider = ({
     const [auth, setAuth] = usePersistedState('auth', {});
   
     const loginSubmitHandler = async (values) => {
+      try {
       const result = await authService.login(values.email, values.password);
-      console.log(result);
+      
+      
       setAuth(result);
       localStorage.setItem('accessToken', result.accessToken);
       navigate(Path.Home)
+
+      } catch (error) {
+        console.log(error)
+      }
+      
     }
   
     const registerSubmitHandler = async (values) => {
