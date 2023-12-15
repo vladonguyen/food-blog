@@ -24,6 +24,8 @@ import RezepteList from './components/rezepte-list/RezepteList';
 import AuthGuard from './components/guards/AuthGuards';
 import BlogEdit from './components/blog-edit/BlogEdit';
 import RezepteEdit from './components/rezepte-edit/RezepteEdit';
+import BlogListMy from './components/blog-list/BlogListMy';
+import RezepteListMy from './components/rezepte-list/RezepteListMy';
 
 
 
@@ -64,6 +66,8 @@ clearLocalStorage();
 <Route path={Path.BlogEdit} element={<BlogEdit />} />
 <Route path='/rezepte/create' element={<RezepteCreate />} />
 <Route path={Path.RezepteEdit} element={<RezepteEdit />} />
+<Route path='/blog/my' element={<BlogListMy />} />
+<Route path='/rezepte/my' element={<RezepteListMy />} />
           <Route path={Path.Logout} element={<Logout />} />
           </Route>
         </Routes>

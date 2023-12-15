@@ -1,6 +1,12 @@
 import * as request  from "../lib/request";
 
-const baseUrl = 'http://localhost:3030/data/blog'
+
+
+
+const baseUrl = 'http://localhost:3030/data/blog';
+
+// const {owner} = useContext(AuthContext);
+// console.log(owner)
 
 export const getAll = async () => {
 const result = await request.get(`${baseUrl}?sortBy=date`);
@@ -8,6 +14,12 @@ console.log(result)
 return result
 };
 
+
+export const getAllMyBlog = async (ownerId) => {
+    const result = await request.get(`${baseUrl}?sortBy=date&where=_ownerId%3D%22${ownerId}%22`);
+    console.log(result)
+    return result
+    };
 
 
 export const getOne = async (blogId) => {

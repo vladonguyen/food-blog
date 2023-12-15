@@ -8,6 +8,12 @@ const result = await request.get(`${baseUrl}?sortBy=date`);
 return result;
 };
 
+export const getAllMyRezepte = async (ownerId) => {
+    const result = await request.get(`${baseUrl}?sortBy=date&where=_ownerId%3D%22${ownerId}%22`);
+  
+    return result
+    };
+
 export const getLastSix = async () => {
     const result = await request.get(`${baseUrl}?sortBy=date&pageSize=6`);
     console.log(result)

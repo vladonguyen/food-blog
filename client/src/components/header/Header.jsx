@@ -106,6 +106,12 @@ export default function Header(){
                     <Link to="/rezepte/create">Create receipe</Link>
                     </li>
                     <li>
+                    <Link to="/blog/my">My blog posts</Link>
+                    </li>
+                    <li>
+                    <Link to="/rezepte/my">My recipes</Link>
+                    </li>
+                    <li>
                     <Link to="/logout">Logout</Link>
                     </li>
                         <span>| {username}</span>
