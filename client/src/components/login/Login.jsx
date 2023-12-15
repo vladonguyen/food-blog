@@ -3,20 +3,29 @@ import useForm from "../../hooks/useForms";
 import AuthContext from "../../context/authContext";
 import { Link } from "react-router-dom";
 
+
+
+
+
+
+
 const LoginFormKeys = {
     Email: 'email',
     Password: 'password'
 }
 
 
+
 export default function Login(){
     const {loginSubmitHandler} = useContext(AuthContext);
     const {values, onChange, onSubmit} = useForm(loginSubmitHandler,{
         [LoginFormKeys.Email]:'',
-        [LoginFormKeys.Password]:'',
+        [LoginFormKeys.Password]:'', 
 });
 
-const [isError, setError] = useState(false);
+const {isLoginError} = useContext(AuthContext);
+
+
 
     return(
 
@@ -55,7 +64,7 @@ const [isError, setError] = useState(false);
   </div>
 
  
-  {isError && <span>There is error!</span>}
+  {isLoginError && <span>{isLoginError.message}</span>}
 
   <button type="submit" className="btn delicious-btn mt-30">
     Submit

@@ -14,7 +14,10 @@ export default function Register() {
         [RegisterFormKeys.Email]: '',
         [RegisterFormKeys.Password]: '',
         [RegisterFormKeys.ConfirmPassword]: '',
-    })
+    });
+
+    const {isRegError} = useContext(AuthContext);
+
     return (
         <section id="register-page" className="content auth">
             <form id="register" onSubmit={onSubmit}>
@@ -47,6 +50,7 @@ export default function Register() {
                         onChange={onChange}
                         values={values[RegisterFormKeys.ConfirmPassword]}
                     />
+  {isRegError && <span>{isRegError}</span>}
 
                     <input
                         className="btn 

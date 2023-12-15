@@ -2,6 +2,7 @@ import { useState } from "react"
 
 export default function useForm(submitHandler, initialValues){
 const [values, setValues] = useState(initialValues);
+let someError = {};
 
 const onChange = (e) =>{
 setValues(state => ({
@@ -10,9 +11,12 @@ setValues(state => ({
 }));
 }
 
-const onSubmit = (e) =>{
+const onSubmit = async (e) =>{
     e.preventDefault();
-    submitHandler(values);
+   await submitHandler(values);
+
+    
+
 }
     return {
 values,

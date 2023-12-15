@@ -17,9 +17,14 @@ export const AuthProvider = ({
 
     const navigate = useNavigate();
     const [auth, setAuth] = usePersistedState('auth', {});
+
+    const [isLoginError, setLoginError] = useState(false);
+
   
     const loginSubmitHandler = async (values) => {
+      
       try {
+      setLoginError(false);
       const result = await authService.login(values.email, values.password);
       
       
@@ -28,17 +33,30 @@ export const AuthProvider = ({
       navigate(Path.Home)
 
       } catch (error) {
-        console.log(error)
+        setLoginError(JSON.parse(error.message))
+       return error
+
       }
       
     }
+
+    const [isRegError, setRegError] = useState(false);
   
     const registerSubmitHandler = async (values) => {
-      const result = await authService.register(values.email, values.password);
+      try {
+        setRegError(false);
+        const result = await authService.register(values.email, values.password);
       setAuth(result);
       localStorage.setItem('accessToken', result.accessToken);
   
       navigate(Path.Home);
+        
+      } catch (error) {
+        setRegError(error.message);
+        return error
+
+      }
+      
     }
   
     const logoutHandler = () => { 
@@ -48,6 +66,8 @@ export const AuthProvider = ({
       
   
     }
+
+
   
     const values = {
       loginSubmitHandler,
@@ -57,6 +77,10 @@ export const AuthProvider = ({
       email: auth.email,
       userId: auth._id,
       isAuthenticated: !!auth.accessToken,
+      isLoginError,
+      setLoginError,
+      isRegError,
+      setRegError
     }
 
 
