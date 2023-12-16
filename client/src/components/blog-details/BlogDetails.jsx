@@ -15,7 +15,7 @@ export default function blogDetails() {
     const {email, userId} = useContext(AuthContext);
     const [blog, setBlog] = useState({});
     const {owner} = useContext(AuthContext);
-    // const [comments, dispatch] = useReducer(reducer, [])
+    const [comments, dispatch] = useReducer(reducer, [])
     const { blogId } = useParams();
     const navigate = useNavigate();
 
@@ -24,31 +24,31 @@ export default function blogDetails() {
         blogService.getOne(blogId)
             .then(setBlog);
 
-            // commentService.getAll(blogId)
-            // .then((result)=> {
-            //     dispatch({
-            //         type: 'GET_ALL_COMMENTS',
-            //         payload: result,
-            //     })
-            // });
+            commentService.getAll(blogId)
+            .then((result)=> {
+                dispatch({
+                    type: 'GET_ALL_COMMENTS',
+                    payload: result,
+                })
+            });
           
     }, [blogId]);
 
-  //   const addCommentHandler = async (values) => {
+    const addCommentHandler = async (values) => {
 
-  //     const newComment = await commentService.create(
-  //         blogId,
-  //         values.comment
-  //     );
+      const newComment = await commentService.create(
+          blogId,
+          values.comment
+      );
 
-  //         newComment.owner = {email};
+          newComment.owner = {email};
 
-  //         dispatch({
-  //             type: 'ADD_COMMENT',
-  //             payload: newComment
-  //         });
+          dispatch({
+              type: 'ADD_COMMENT',
+              payload: newComment
+          });
           
-  // }
+  }
 
 const deleteButtonClickHandler = async ()=>{
 const hasConfirmed = confirm(`Are you sure you want to delete ${blog.title}`);
@@ -63,7 +63,9 @@ navigate('/blog');
       comment:'',
   }), []);
 
-  const {values, onChange, onSubmit} = useForm(initialValues);
+  const { values, onChange, onSubmit } = useForm(addCommentHandler, {
+    comment: '',
+});
 
     return (
        
@@ -114,9 +116,32 @@ navigate('/blog');
                   by {blog.authorName}
                 
                 </div>
-                <p>
+                
                  {blog.articleContent}
-                </p>
+                 <div className="details-comments">
+                    <h2>Comments:</h2>
+                    <ul>
+                        {comments.map(({ _id, text, owner: { email } }) => (
+                            <li key={_id} className="comment">
+                                <p>{email}: {text}</p>
+                            </li>
+                        ))}
+                    </ul>
+
+                    {comments.length === 0 && (
+                        <p className="no-comment">No comments.</p>
+                    )}
+                </div>
+
+                
+                <article className="create-comment">
+                <label>Add new comment:</label>
+                <form className="form" onSubmit={onSubmit}>
+                    <textarea name="comment" value={values.comment} onChange={onChange} placeholder="Comment......"></textarea>
+                    <input className="btn submit" type="submit" value="Add Comment" />
+                </form>
+            </article>
+
                 {userId === blog._ownerId && (
  <div className="buttons">
  <Link to={pathToUrl(Path.BlogEdit, {blogId})} className="button">Edit</Link>
