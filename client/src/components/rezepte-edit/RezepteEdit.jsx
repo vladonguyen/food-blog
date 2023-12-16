@@ -2,7 +2,11 @@ import {useNavigate, useParams} from 'react-router-dom'
 import *  as rezepteService from "../../services/rezepteService";
 import { useEffect, useState } from 'react';
 
+import { useContext } from 'react';
+import AuthContext from '../../context/authContext';
+
 export default function RezepteEdit(){
+    const {token} = useContext(AuthContext);
     const navigate = useNavigate();
     const {rezepteId} = useParams();
     const [rezepte, setRezepte] = useState({
@@ -26,7 +30,7 @@ export default function RezepteEdit(){
         const values = Object.fromEntries(new FormData(e.currentTarget));
 console.log(values)
         try {
-            await rezepteService.edit(rezepteId, values);
+            await rezepteService.edit(rezepteId, values, token);
             navigate('/rezepte');
     
         } catch (err) {

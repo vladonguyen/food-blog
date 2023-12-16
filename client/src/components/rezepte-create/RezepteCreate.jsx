@@ -1,8 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import *  as rezepteService from "../../services/rezepteService";
 
+import { useContext } from 'react';
+import AuthContext from '../../context/authContext';
+
 
 export default function RezepteCreate() {
+    const {token} = useContext(AuthContext);
     const navigate = useNavigate();
     const createRezepteSubmitHandler = async (e) => {
        
@@ -10,7 +14,7 @@ export default function RezepteCreate() {
 
         const rezepteData = Object.fromEntries(new FormData(e.currentTarget));
         try {
-            await rezepteService.create(rezepteData);
+            await rezepteService.create(rezepteData, token);
             navigate('/rezepte');
 
         } catch (err) {
