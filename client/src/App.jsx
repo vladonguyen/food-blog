@@ -1,4 +1,4 @@
-import '../public/style.css';
+
 
 import { useState } from "react";
 import { Routes, Route, useNavigate } from 'react-router-dom'
@@ -26,6 +26,7 @@ import BlogEdit from './components/blog-edit/BlogEdit';
 import RezepteEdit from './components/rezepte-edit/RezepteEdit';
 import BlogListMy from './components/blog-list/BlogListMy';
 import RezepteListMy from './components/rezepte-list/RezepteListMy';
+import About from './components/about/About';
 
 
 
@@ -49,10 +50,11 @@ clearLocalStorage();
 
   return (
     <AuthProvider>
-      <div id="box">
+      <div>
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
           <Route path='/blog' element={<BlogList />} />
           
           <Route path='/login' element={<Login />} />
