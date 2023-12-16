@@ -2,7 +2,11 @@ import {useNavigate, useParams} from 'react-router-dom'
 import *  as blogService from "../../services/blogService";
 import { useEffect, useState } from 'react';
 
+import { useContext } from 'react';
+import AuthContext from '../../context/authContext';
+
 export default function BlogEdit(){
+    const {token} = useContext(AuthContext);
     const navigate = useNavigate();
     const {blogId} = useParams();
     const [blog, setBlog] = useState({
@@ -26,7 +30,7 @@ export default function BlogEdit(){
         const values = Object.fromEntries(new FormData(e.currentTarget));
 console.log(values)
         try {
-            await blogService.edit(blogId, values);
+            await blogService.edit(blogId, values, token);
             navigate('/blog');
     
         } catch (err) {

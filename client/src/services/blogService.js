@@ -41,14 +41,14 @@ export const create = async (blogData, token) => {
     return result
 }
 
-export const edit = async (blogId, blogData) => {
-    const result = await request.put(`${baseUrl}/${blogId}`, blogData);
+export const edit = async (blogId, blogData, token) => {
+    const result = await request.put(`${baseUrl}/${blogId}`, blogData, token);
 
     return result;
 }
 
-export const remove = async (blogId) => {
-    const result =   request.remove(`${baseUrl}/${blogId}`);
+export const remove = async (blogId, token) => {
+    const result =   request.remove(`${baseUrl}/${blogId}`, null, token);
   
       return result;
   }

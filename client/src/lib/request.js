@@ -4,6 +4,7 @@ import logoutHandler from '../context/authContext';
 
 
  const request = async (method, url, data, token) => {
+
     const buildOptions = (data) => {
         const options = {};
         
@@ -25,11 +26,6 @@ import logoutHandler from '../context/authContext';
             }
             return options;
         };
-
-
-
-
-
 
 
     try {
