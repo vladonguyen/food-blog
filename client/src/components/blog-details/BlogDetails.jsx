@@ -39,7 +39,8 @@ export default function blogDetails() {
 
     const newComment = await commentService.create(
       blogId,
-      values.comment
+      values.comment,
+      token
     );
 
     newComment.owner = { email };
