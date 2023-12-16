@@ -29,7 +29,7 @@ export const AuthProvider = ({
       
       
       setAuth(result);
-      localStorage.setItem('accessToken', result.accessToken);
+      // localStorage.setItem('accessToken', result.accessToken);
       navigate(Path.Home)
 
       } catch (error) {
@@ -47,7 +47,7 @@ export const AuthProvider = ({
         setRegError(false);
         const result = await authService.register(values.email, values.password);
       setAuth(result);
-      localStorage.setItem('accessToken', result.accessToken);
+      // localStorage.setItem('accessToken', result.accessToken);
   
       navigate(Path.Home);
         
@@ -62,7 +62,7 @@ export const AuthProvider = ({
     const logoutHandler = () => { 
 
       setAuth({});
-      localStorage.removeItem('accessToken');
+      // localStorage.removeItem('accessToken');
       
   
     }
@@ -77,6 +77,7 @@ export const AuthProvider = ({
       email: auth.email,
       userId: auth._id,
       isAuthenticated: !!auth.accessToken,
+      token: auth.accessToken,
       isLoginError,
       setLoginError,
       isRegError,

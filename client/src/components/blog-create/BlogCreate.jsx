@@ -1,14 +1,19 @@
 import { useNavigate } from 'react-router-dom'
 import *  as blogService from "../../services/blogService";
+import { useContext } from 'react';
+import AuthContext from '../../context/authContext';
 
 export default function BlogCreate() {
+    const {token} = useContext(AuthContext);
     const navigate = useNavigate();
     const createBlogSubmitHandler = async (e) => {
         e.preventDefault();
 
         const blogData = Object.fromEntries(new FormData(e.currentTarget));
         try {
-            await blogService.create(blogData);
+            
+            
+            await blogService.create(blogData, token);
             navigate('/blog');
 
         } catch (err) {

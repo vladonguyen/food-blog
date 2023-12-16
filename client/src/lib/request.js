@@ -1,34 +1,42 @@
 import logoutHandler from '../context/authContext';
 
-const buildOptions = (data) => {
-const options = {};
 
-if (data){
-    options.body = JSON.stringify(data);
-    options.headers = {
-        'content-type': 'application/json'
-    };
 
-}
 
-const token = localStorage.getItem('accessToken');
-
-if(token){
-    options.headers = {
-     
-            ...options.headers,
-            'X-Authorization': token
+ const request = async (method, url, data, token) => {
+    const buildOptions = (data) => {
+        const options = {};
+        
+        if (data){
+            options.body = JSON.stringify(data);
+            options.headers = {
+                'content-type': 'application/json'
+            };
+        
         }
-    }
-    return options;
-};
-  
+        
+        
+        if(token){
+            options.headers = {
+             
+                    ...options.headers,
+                    'X-Authorization': token
+                }
+            }
+            return options;
+        };
 
 
- const request = async (method, url, data) => {
+
+
+
+
+
     try {
+        console.log(token)
         const response = await fetch(url, {
             ...buildOptions(data),
+            'X-Authorization': token,
             method,
         });
         if(response.status === 204){

@@ -35,8 +35,8 @@ export const getLastTwo = async () => {
 
 
 
-export const create = async (blogData) => {
-    const result = await request.post(baseUrl, blogData);
+export const create = async (blogData, token) => {
+    const result = await request.post(baseUrl, blogData, token);
 
     return result
 }
