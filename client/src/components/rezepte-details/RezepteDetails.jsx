@@ -11,6 +11,7 @@ import RezepteEdit from "../rezepte-edit/RezepteEdit";
 
 
 export default function rezepteDetails() {
+  const {token} = useContext(AuthContext);
   const {email, userId} = useContext(AuthContext);
   const [rezepte, setRezepte] = useState({});
   const {owner} = useContext(AuthContext);
@@ -52,7 +53,7 @@ export default function rezepteDetails() {
 const deleteButtonClickHandler = async ()=>{
 const hasConfirmed = confirm(`Are you sure you want to delete ${rezepte.title}`);
 if(hasConfirmed){
-await   rezepteService.remove(rezepteId);
+await   rezepteService.remove(rezepteId, token);
 navigate('/rezepte');
 }
 

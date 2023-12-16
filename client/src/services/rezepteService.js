@@ -28,20 +28,20 @@ export const getOne = async (rezepteId) => {
 
 
 
-export const create = async (rezepteData) => {
-    const result = await request.post(baseUrl, rezepteData);
+export const create = async (rezepteData, token) => {
+    const result = await request.post(baseUrl, rezepteData, token);
 
     return result;
 }
 
-export const edit = async (rezepteId, rezepteData) => {
-    const result = await request.put(`${baseUrl}/${rezepteId}`, rezepteData);
+export const edit = async (rezepteId, rezepteData, token) => {
+    const result = await request.put(`${baseUrl}/${rezepteId}`, rezepteData, token);
 
     return result;
 }
 
-export const remove = async (rezepteId) => {
-    const result =   request.remove(`${baseUrl}/${rezepteId}`);
+export const remove = async (rezepteId, token) => {
+    const result =   request.remove(`${baseUrl}/${rezepteId}`, null, token);
   
       return result;
   }
