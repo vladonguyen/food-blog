@@ -27,7 +27,7 @@ export default function NavMenu() {
 
     <div className="topnav" id="myTopnav">
       <Link  className="nav-brand" to="/">
-        <img className='logo-header' src="img/core-img/pancake.png" alt="" />
+        <img className='logo-header' src="/img/core-img/pizza.png" alt="pizza" />
       </Link >
       <NavLink  to="/">
         Home
