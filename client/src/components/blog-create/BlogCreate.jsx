@@ -55,14 +55,14 @@ throw Error('All fields must be filled!');
                     <input type="text" id="title" name="title" placeholder="Enter post title..."  className="form-control"/>
 
 
-                    <label htmlFor="imageUrl">Image:</label>
+                    <label htmlFor="imageUrl">Image Url:</label>
                     <input type="text" id="imageUrl" name="imageUrl" placeholder="Image size must 1280x720px"  className="form-control" />
 
                     <label htmlFor="desc">Short description:</label>
                     <textarea name="desc" id="desc"  className="form-control"></textarea>
 
-                    <label htmlFor="articleContent">Article text:</label>
-                    <textarea name="articleContent" id="articleContent"  className="form-control"></textarea>
+                    <label htmlFor="articleContent">Article full text:</label>
+                    <textarea name="articleContent" id="articleContent"  className="form-control articleFullText"></textarea>
 
                     <label htmlFor="date">Publish date:</label>
 
