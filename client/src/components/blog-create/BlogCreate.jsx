@@ -16,23 +16,23 @@ export default function BlogCreate() {
 
         function hasEmptyValues(obj) {
             for (const key in obj) {
-              if (obj.hasOwnProperty(key)) {
-                if (!obj[key]) {
-                    setCreateBlogError({message: "All fields must be filed!"})
-                  return true; // Found an empty value
+                if (obj.hasOwnProperty(key)) {
+                    if (!obj[key]) {
+                        setCreateBlogError({ message: "All fields must be filed!" })
+                        return true; // Found an empty value
+                    }
                 }
-              }
             }
             return false; // No empty values found
-          }
+        }
 
         const blogData = Object.fromEntries(new FormData(e.currentTarget));
         try {
 
-            if(hasEmptyValues(blogData)){
-throw Error('All fields must be filled!');
+            if (hasEmptyValues(blogData)) {
+                throw Error('All fields must be filled!');
             }
-            
+
 
 
             await blogService.create(blogData, token);
@@ -40,36 +40,36 @@ throw Error('All fields must be filled!');
 
         } catch (error) {
             console.error(error.message);
-    return null;
+            return null;
         }
 
     }
     return (
         <section id="create-page" className="auth ">
             <form id="create" onSubmit={createBlogSubmitHandler} className='createCenter'>
-            <div ><h1 className='h1Center'>Create Post</h1></div>
+                <div ><h1 className='h1Center'>Create Post</h1></div>
                 <div className="container createForm white row newsletter-form bg-img bg-overlay" >
-                
-                    
+
+
                     <label htmlFor="title">Post title:</label>
-                    <input type="text" id="title" name="title" placeholder="Enter post title..."  className="form-control"/>
+                    <input type="text" id="title" name="title" placeholder="Enter post title..." className="form-control" />
 
 
                     <label htmlFor="imageUrl">Image Url:</label>
-                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Image size must 1280x720px"  className="form-control" />
+                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Image size must 1280x720px" className="form-control" />
 
                     <label htmlFor="desc">Short description:</label>
-                    <textarea name="desc" id="desc"  className="form-control"></textarea>
+                    <textarea name="desc" id="desc" className="form-control"></textarea>
 
                     <label htmlFor="articleContent">Article full text:</label>
-                    <textarea name="articleContent" id="articleContent"  className="form-control articleFullText"></textarea>
+                    <textarea name="articleContent" id="articleContent" className="form-control articleFullText"></textarea>
 
                     <label htmlFor="date">Publish date:</label>
 
-                    <input type="date" id="date" name="date"  className="form-control" />
+                    <input type="date" id="date" name="date" className="form-control" />
 
                     <label htmlFor="authorName">Author name:</label>
-                    <input type="text" id="author-name" name="authorName" placeholder="Enter author"  className="form-control"/>
+                    <input type="text" id="author-name" name="authorName" placeholder="Enter author" className="form-control" />
 
                     {isCreateBlogError && <div className='createErrorMess'>{isCreateBlogError.message}</div>}
 

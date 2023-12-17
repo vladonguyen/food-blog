@@ -1,3 +1,5 @@
+import '../blog-create/blogcreate.css'
+
 import {useNavigate, useParams} from 'react-router-dom'
 import *  as blogService from "../../services/blogService";
 import { useEffect, useState } from 'react';
@@ -6,16 +8,33 @@ import { useContext } from 'react';
 import AuthContext from '../../context/authContext';
 
 export default function BlogEdit(){
+    const { isEditBlogError } = useContext(AuthContext);
+    const { setEditBlogError } = useContext(AuthContext);
+
+    function hasEmptyValues(obj) {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (!obj[key]) {
+                    setEditBlogError({ message: "All fields must be filed!" })
+                    return true; // Found an empty value
+                }
+            }
+        }
+        return false; // No empty values found
+    }
+  
+    
+
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
     const {blogId} = useParams();
     const [blog, setBlog] = useState({
         title: '',
-        category: '',
-        maxLevel: '',
         imageUrl: '',
-        imageUrlHome: '',
-        summary: '',
+        desc: '',
+        articleContent: '',
+        date:'',
+        authorName:'',
         
     });
     useEffect(()=> {
@@ -30,7 +49,11 @@ export default function BlogEdit(){
         const values = Object.fromEntries(new FormData(e.currentTarget));
 console.log(values)
         try {
+            if (hasEmptyValues(values)) {
+                throw Error('All fields must be filled!');
+            }
             await blogService.edit(blogId, values, token);
+           
             navigate('/blog');
     
         } catch (err) {
@@ -48,42 +71,43 @@ console.log(values)
     }
 
     return(
-        <section id="create-page" className="auth">  
-        <form id="create" onSubmit={editBlogSubmitHandler}>
-            <div className="container">
+        <>
+ 
 
-                <h1>Edit Blog</h1>
-
-
-
-<h1>Create Post</h1>
+    <section id="create-page" className="auth ">
+            <form id="create" onSubmit={editBlogSubmitHandler} className='createCenter'>
+            <div ><h1 className='h1Center'>Edit Post</h1></div>
+                <div className="container createForm white row newsletter-form bg-img bg-overlay" >
+                
+                    
                     <label htmlFor="title">Post title:</label>
-                    <input type="text" id="title" name="title" placeholder="Enter post title..." value={blog.title} onChange={onChange} />
+                    <input type="text" id="title" name="title" placeholder="Enter post title..."  className="form-control" value={blog.title} onChange={onChange}/>
 
 
-                    <label htmlFor="imageUrl">Image:</label>
-                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Give photo url..." value={blog.imageUrl} onChange={onChange}/>
+                    <label htmlFor="imageUrl">Image Url:</label>
+                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Image size must 1280x720px"  className="form-control" value={blog.imageUrl} onChange={onChange}/>
 
-                    <label htmlFor="imageUrl">Image:</label>
-                    <input type="text" id="imageUrlHome" name="imageUrlHome" placeholder="Give home photo url..." value={blog.imageUrlHome} onChange={onChange}/>
+                    <label htmlFor="desc">Short description:</label>
+                    <textarea name="desc" id="desc"  className="form-control" value={blog.desc} onChange={onChange}></textarea>
 
-
-                    <label htmlFor="desc">Description:</label>
-                    <textarea name="desc" id="desc" value={blog.desc} onChange={onChange}></textarea>
-
-                    <label htmlFor="articleContent">Article text:</label>
-                    <textarea name="articleContent" id="articleContent" value={blog.articleContent} onChange={onChange}></textarea>
+                    <label htmlFor="articleContent">Article full text:</label>
+                    <textarea name="articleContent" id="articleContent"  className="form-control articleFullText" value={blog.articleContent} onChange={onChange}></textarea>
 
                     <label htmlFor="date">Publish date:</label>
-                    <input type="date" id="date" name="date" value={blog.date} onChange={onChange}/>
+
+                    <input type="date" id="date" name="date"  className="form-control" value={blog.date} onChange={onChange}/>
 
                     <label htmlFor="authorName">Author name:</label>
-                    <input type="text" id="author-name" name="authorName" placeholder="Enter author" value={blog.authorName} onChange={onChange}/>
+                    <input type="text" id="author-name" name="authorName" placeholder="Enter author"  className="form-control" value={blog.authorName} onChange={onChange}/>
 
-                <input className="btn submit" type="submit" value="Edit Blog"  />
-            </div>
-        </form>
-    </section>
+                    {isEditBlogError && <div className='createErrorMess'>{isEditBlogError.message}</div>}
 
+                    <button className="btn delicious-btn mt-30 createBtnCenter" type="submit">Edit post</button>
+                </div>
+
+            </form>
+        </section>
+
+    </>
     );
 }

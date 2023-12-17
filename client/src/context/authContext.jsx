@@ -20,6 +20,7 @@ export const AuthProvider = ({
 
     const [isLoginError, setLoginError] = useState(false);
     const [isCreateBlogError, setCreateBlogError] = useState(false);
+    const [isEditBlogError, setEditBlogError] = useState(false);
 
   
     const loginSubmitHandler = async (values) => {
@@ -85,7 +86,9 @@ export const AuthProvider = ({
       isRegError,
       setRegError,
       isCreateBlogError,
-      setCreateBlogError
+      setCreateBlogError,
+      isEditBlogError,
+      setEditBlogError
     }
 
 
