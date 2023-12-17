@@ -1,7 +1,7 @@
 import '../nav-menu/navmenu.css';
 
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link} from 'react-router-dom';
 import AuthContext from '../../../context/authContext';
 
 
@@ -26,15 +26,15 @@ export default function NavMenu() {
   return (
 
     <div className="topnav" id="myTopnav">
-      <Link className="nav-brand" to="/">
+      <Link  className="nav-brand" to="/">
         <img className='logo-header' src="img/core-img/pancake.png" alt="" />
-      </Link>
-      <Link to="/" className="active">
+      </Link >
+      <NavLink  to="/">
         Home
-      </Link>
-      <Link to="/about">About us</Link>
-      <Link to="/blog">Blog</Link>
-      <Link to="/rezepte">Recipes</Link>
+      </NavLink >
+      <NavLink   to="/about">About us</NavLink  >
+      <NavLink  to="/blog">Blog</NavLink >
+      <NavLink  to="/rezepte">Recipes</NavLink >
       {isAuthenticated && (
         <> <div className="dropdown">
           <button className="dropbtn">
@@ -42,15 +42,15 @@ export default function NavMenu() {
             <i className="fa fa-caret-down" />
           </button>
           <div className="dropdown-content">
-            <Link to="/blog/create">Create post</Link>
-            <Link to="/rezepte/create">Create receipe</Link>
+            <NavLink  to="/blog/create">Create post</NavLink >
+            <NavLink  to="/rezepte/create">Create receipe</NavLink >
           </div>
         </div>
         </>
       )}
       {!isAuthenticated && (   <>
-      <Link to="/login">Login</Link>
-      <Link to="/register">Register</Link>
+      <NavLink  to="/login">Login</NavLink >
+      <NavLink  to="/register">Register</NavLink >
       </>
       )}
        {isAuthenticated && (
@@ -62,17 +62,17 @@ export default function NavMenu() {
               <i className="fa fa-caret-down" />
             </button>
             <div className="dropdown-content">
-              <Link to="/blog/my">My blog posts</Link>
-              <Link to="/rezepte/my">My recipes</Link>
-              <Link to="/logout">Logout</Link>
+              <NavLink  to="/blog/my">My blog posts</NavLink >
+              <NavLink  to="/rezepte/my">My recipes</NavLink >
+              <NavLink  to="/logout">Logout</NavLink >
             </div>
           </div>
        
       </>
       )}
-      <Link to="" className="icon" onClick={responsiveMenuClick}>
+      <NavLink  to="" className="icon" onClick={responsiveMenuClick}>
         &#9776;
-      </Link>
+      </NavLink >
     </div>
   )
 }
