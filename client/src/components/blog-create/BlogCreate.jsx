@@ -1,3 +1,5 @@
+import '../blog-create/blogcreate.css'
+
 import { useNavigate } from 'react-router-dom'
 import *  as blogService from "../../services/blogService";
 
@@ -5,54 +7,73 @@ import { useContext } from 'react';
 import AuthContext from '../../context/authContext';
 
 export default function BlogCreate() {
-    const {token} = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
+    const { isCreateBlogError } = useContext(AuthContext);
+    const { setCreateBlogError } = useContext(AuthContext);
     const navigate = useNavigate();
     const createBlogSubmitHandler = async (e) => {
         e.preventDefault();
 
+        function hasEmptyValues(obj) {
+            for (const key in obj) {
+              if (obj.hasOwnProperty(key)) {
+                if (!obj[key]) {
+                    setCreateBlogError({message: "All fields must be filed!"})
+                  return true; // Found an empty value
+                }
+              }
+            }
+            return false; // No empty values found
+          }
+
         const blogData = Object.fromEntries(new FormData(e.currentTarget));
         try {
+
+            if(hasEmptyValues(blogData)){
+throw Error('All fields must be filled!');
+            }
             
-            
+
+
             await blogService.create(blogData, token);
             navigate('/blog');
 
-        } catch (err) {
-            //Error notification
-            console.log(err)
+        } catch (error) {
+            console.error(error.message);
+    return null;
         }
 
     }
     return (
-        <section id="create-page" className="auth">
-            <form id="create" onSubmit={createBlogSubmitHandler}>
-                <div className="container">
-
-                    <h1>Create Post</h1>
+        <section id="create-page" className="auth ">
+            <form id="create" onSubmit={createBlogSubmitHandler} className='createCenter'>
+            <div ><h1 className='h1Center'>Create Post</h1></div>
+                <div className="container createForm white row newsletter-form bg-img bg-overlay" >
+                
+                    
                     <label htmlFor="title">Post title:</label>
-                    <input type="text" id="title" name="title" placeholder="Enter post title..." />
+                    <input type="text" id="title" name="title" placeholder="Enter post title..."  className="form-control"/>
 
 
                     <label htmlFor="imageUrl">Image:</label>
-                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Give photo url..." />
+                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Image size must 1280x720px"  className="form-control" />
 
-                    <label htmlFor="imageUrlHome">Image:</label>
-                    <input type="text" id="imageUrlHome" name="imageUrlHome" placeholder="Give home photo url..." />
-
-                    <label htmlFor="desc">Description:</label>
-                    <textarea name="desc" id="desc"></textarea>
+                    <label htmlFor="desc">Short description:</label>
+                    <textarea name="desc" id="desc"  className="form-control"></textarea>
 
                     <label htmlFor="articleContent">Article text:</label>
-                    <textarea name="articleContent" id="articleContent"></textarea>
+                    <textarea name="articleContent" id="articleContent"  className="form-control"></textarea>
 
                     <label htmlFor="date">Publish date:</label>
 
-                    <input type="date" id="date" name="date" />
+                    <input type="date" id="date" name="date"  className="form-control" />
 
                     <label htmlFor="authorName">Author name:</label>
-                    <input type="text" id="author-name" name="authorName" placeholder="Enter author" />
-                    
-                    <input className="btn submit" type="submit" value="Create Post" />
+                    <input type="text" id="author-name" name="authorName" placeholder="Enter author"  className="form-control"/>
+
+                    {isCreateBlogError && <div className='createErrorMess'>{isCreateBlogError.message}</div>}
+
+                    <button className="btn delicious-btn mt-30 createBtnCenter" type="submit">Create post</button>
                 </div>
 
             </form>
