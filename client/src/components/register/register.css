@@ -1,0 +1,42 @@
+.regForm{
+    margin: 40px auto auto auto;
+    width: 30%;
+    min-width: 200px;
+    padding: 10px;
+}
+
+.regCenter {
+    margin: 0 auto;
+}
+
+.btnCenter{
+    
+    display: flex;
+    justify-content: center;
+}
+
+.white{
+    color:white;
+}
+
+.haveProfile{
+    font-size: 14px;
+}
+
+.haveProfile{
+    font-size: 14px;
+}
+
+
+.haveProfileLink{
+    color: #40ba37;
+}
+
+.regErrorMess{
+    display: flex;
+    color: rgb(219, 25, 25);
+    font-size: 14px;
+    font-weight:bold;
+    justify-content: center;
+   
+}

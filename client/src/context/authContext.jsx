@@ -45,7 +45,8 @@ export const AuthProvider = ({
     const registerSubmitHandler = async (values) => {
       try {
         setRegError(false);
-        const result = await authService.register(values.email, values.password);
+        const result = await authService.register(values.email, values.password, values.confirmPassword);
+        console.log(result,'registerSubmitHandler' );
       setAuth(result);
       // localStorage.setItem('accessToken', result.accessToken);
   

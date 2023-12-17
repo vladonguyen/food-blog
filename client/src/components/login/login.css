@@ -1,0 +1,41 @@
+.loginForm{
+    margin: 40px auto auto auto;
+    width: 30%;
+    min-width: 200px;
+    padding: 10px;
+}
+
+.loginCenter {
+    margin: 0 auto;
+}
+
+.white{
+    color:white;
+}
+
+.needProfile{
+    font-size: 14px;
+}
+
+.needProfile{
+    font-size: 14px;
+}
+
+
+.needProfileLink{
+    color: #40ba37;
+}
+
+.loginErrorMess{
+    display: block;
+    color: rgb(219, 25, 25);
+    font-size: 14px;
+    font-weight:bold;
+   
+}
+
+.btnCenter{
+    
+    display: flex;
+    justify-content: center;
+}

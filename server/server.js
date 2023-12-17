@@ -1091,14 +1091,21 @@
             }
 
             function register(body) {
+            
                 if (body.hasOwnProperty(identity) === false ||
                     body.hasOwnProperty('password') === false ||
                     body[identity].length == 0 ||
                     body.password.length == 0) {
+                        console.log(body.password.length );
                     throw new RequestError$2('Missing fields');
                 } else if (context.protectedStorage.query('users', { [identity]: body[identity] }).length !== 0) {
                     throw new ConflictError$1(`A user with the same ${identity} already exists`);
-                } else {
+                } else if(body.password != body.confirmPassword){
+                    throw new RequestError$2('Passwords do not match!');
+                } else if(body.password.length <= 4){
+                    throw new RequestError$2('Password must be at least 5 characters long!');
+                } 
+                else {
                     const newUser = Object.assign({}, body, {
                         [identity]: body[identity],
                         hashedPassword: hash(body.password)

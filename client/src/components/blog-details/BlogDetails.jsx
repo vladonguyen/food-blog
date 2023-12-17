@@ -6,7 +6,7 @@ import * as blogService from '../../services/blogService';
 import * as commentService from '../../services/commentService';
 import AuthContext from "../../context/authContext";
 import reducer from "./commentReducer";
-import useForm from "../../hooks/useForms";
+import useForm from "../../hooks/useForm";
 import { pathToUrl } from "../utils/pathUtils";
 import Path from "../../paths";
 import BlogEdit from "../blog-edit/BlogEdit";
