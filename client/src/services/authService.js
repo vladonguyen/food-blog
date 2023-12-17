@@ -11,8 +11,9 @@ console.log(result)
     return result;
 }
 
-export const register =  (email, password, confirmPassword) => request.post(`${baseUrl}/register`, {
+export const register =  (email, username, password, confirmPassword) => request.post(`${baseUrl}/register`, {
     email,
+    username,
     password,
     confirmPassword
 })

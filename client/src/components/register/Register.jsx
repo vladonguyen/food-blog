@@ -14,11 +14,11 @@ const RegisterFormKeys = {
 
 export default function Register() {
     const { registerSubmitHandler } = useContext(AuthContext);
-    console.log('pass registerSubmitHandler')
     const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
         [RegisterFormKeys.Email]: '',
         [RegisterFormKeys.Password]: '',
         [RegisterFormKeys.ConfirmPassword]: '',
+        [RegisterFormKeys.Username]: '',
     });
 
     const {isRegError} = useContext(AuthContext);
@@ -40,6 +40,17 @@ export default function Register() {
                     className="form-control"
                     onChange={onChange} 
                     values={values[RegisterFormKeys.Email]}
+                    />
+
+<label htmlFor="email">Username:</label>
+                    <input 
+                    type="username" 
+                    id="username" 
+                    name="username" 
+                    placeholder="John" 
+                    className="form-control"
+                    onChange={onChange} 
+                    values={values[RegisterFormKeys.Username]}
                     />
 
                     <label htmlFor="pass">Password:</label>
