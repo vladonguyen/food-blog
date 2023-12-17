@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import AuthContext from "../../context/authContext";
 import useForm from "../../hooks/useForms";
+import { Link } from "react-router-dom";
 
 const RegisterFormKeys = {
     Email: 'email',
     Password: 'password',
+    Username: 'username',
     ConfirmPassword: 'confirm-password',
 }
 
@@ -50,6 +52,7 @@ export default function Register() {
                         onChange={onChange}
                         values={values[RegisterFormKeys.ConfirmPassword]}
                     />
+                    
   {isRegError && <span>{isRegError}</span>}
 
                     <input
@@ -61,7 +64,7 @@ export default function Register() {
                     />
 
                     <p className="field">
-                        <span>If you already have profile click <a href="#">here</a></span>
+                        <span>If you already have profile click <Link to="login">here</Link></span>
                     </p>
                 </div>
             </form>
