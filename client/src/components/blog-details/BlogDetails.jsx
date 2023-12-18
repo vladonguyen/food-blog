@@ -1,4 +1,5 @@
 import '../blog-details/blog-details.css';
+import '../blog-list/blog-list-item/blogListItem.css'
 
 import { useContext, useEffect, useMemo, useReducer, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -12,6 +13,7 @@ import Path from "../../paths";
 import BlogEdit from "../blog-edit/BlogEdit";
 
 import { hasEmptyValues } from '../utils/validationUtils';
+import { transformDateFormat } from '../utils/trasnsormDate';
 
 
 export default function blogDetails() {
@@ -22,6 +24,8 @@ export default function blogDetails() {
   const [comments, dispatch] = useReducer(reducer, [])
   const { blogId } = useParams();
   const navigate = useNavigate();
+
+  
 
   const {isCommentError } = useContext(AuthContext);
     const { setCommentError } = useContext(AuthContext);
@@ -112,15 +116,12 @@ export default function blogDetails() {
                 <div className="single-blog-area mb-80">
                   <div className="blog-thumbnail">
                     <img src={blog.imageUrl} alt="" />
-                    <div className="post-date">
-
-                      {blog.date}
-
-                    </div>
+                 
                   </div>
                   {/* Content */}
+                 
                   <div className="blog-content">
-
+                  {blog.date} 
                     <h1>  {blog.title}</h1>
 
                     <div className="meta-data">

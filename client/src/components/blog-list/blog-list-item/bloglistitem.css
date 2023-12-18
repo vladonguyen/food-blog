@@ -1,0 +1,27 @@
+.post-date {
+    width: 75px;
+    height: 100px;
+    background-color: #40ba37;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    text-align: center;
+}
+
+.post-date a {
+    color: #ffffff;
+    padding: 18px 10px;
+    display: block;
+    line-height: 1.1;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.post-date a span {
+    font-size: 30px;
+    font-weight: 700;
+    display: block;
+}
