@@ -34,8 +34,8 @@ export default function BlogEdit(){
         blogService.getOne(blogId)
         .then(result => {
             setBlog(result)
-            setText(result.articleContent)
-            ;
+            setText(result.articleContent);
+            
         })
     }, [blogId])
     const editBlogSubmitHandler = async (e) => {
@@ -43,7 +43,7 @@ export default function BlogEdit(){
         setEditBlogError(false);
 
         const values = Object.fromEntries(new FormData(e.currentTarget));
-console.log(values)
+
         try {
             if (hasEmptyValues(values, setEditBlogError)) {
                 throw Error('All fields must be filled!');
