@@ -87,12 +87,13 @@ export default function RezepteCreate() {
 
                     <label htmlFor="authorName">Author name:</label>
                     <input type="text" id="author-name" name="authorName" placeholder="Enter author" className="form-control" />
+                    {isCreateRezepteError && <div className='createErrorMess'>{isCreateRezepteError.message}</div>}
 
                     <button className="btn delicious-btn mt-30 createBtnCenter" type="submit">Create Recipe</button>
 
                     
 
-                    {isCreateRezepteError && <div className='createErrorMess'>{isCreateRezepteError.message}</div>}
+                   
                 </div>
 
             </form>

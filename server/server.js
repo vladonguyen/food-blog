@@ -1,10 +1,11 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('http'), require('fs'), require('crypto')) :
-    typeof define === 'function' && define.amd ? define(['http', 'fs', 'crypto'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Server = factory(global.http, global.fs, global.crypto));
-}(this, (function (http, fs, crypto) { 'use strict';
+        typeof define === 'function' && define.amd ? define(['http', 'fs', 'crypto'], factory) :
+            (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Server = factory(global.http, global.fs, global.crypto));
+}(this, (function (http, fs, crypto) {
+    'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+    function _interopDefaultLegacy(e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
     var http__default = /*#__PURE__*/_interopDefaultLegacy(http);
     var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
@@ -13,14 +14,14 @@
     class ServiceError extends Error {
         constructor(message = 'Service Error') {
             super(message);
-            this.name = 'ServiceError'; 
+            this.name = 'ServiceError';
         }
     }
 
     class NotFoundError extends ServiceError {
         constructor(message = 'Resource not found') {
             super(message);
-            this.name = 'NotFoundError'; 
+            this.name = 'NotFoundError';
             this.status = 404;
         }
     }
@@ -28,7 +29,7 @@
     class RequestError extends ServiceError {
         constructor(message = 'Request error') {
             super(message);
-            this.name = 'RequestError'; 
+            this.name = 'RequestError';
             this.status = 400;
         }
     }
@@ -36,7 +37,7 @@
     class ConflictError extends ServiceError {
         constructor(message = 'Resource conflict') {
             super(message);
-            this.name = 'ConflictError'; 
+            this.name = 'ConflictError';
             this.status = 409;
         }
     }
@@ -44,7 +45,7 @@
     class AuthorizationError extends ServiceError {
         constructor(message = 'Unauthorized') {
             super(message);
-            this.name = 'AuthorizationError'; 
+            this.name = 'AuthorizationError';
             this.status = 401;
         }
     }
@@ -52,7 +53,7 @@
     class CredentialError extends ServiceError {
         constructor(message = 'Forbidden') {
             super(message);
-            this.name = 'CredentialError'; 
+            this.name = 'CredentialError';
             this.status = 403;
         }
     }
@@ -556,8 +557,8 @@
             if (query.pageSize) {
                 responseData = responseData.slice(0, pageSize);
             }
-    		
-    		if (query.distinct) {
+
+            if (query.distinct) {
                 const props = query.distinct.split(',').filter(p => p != '');
                 responseData = Object.values(responseData.reduce((distinct, c) => {
                     const key = props.map(p => c[p]).join('::');
@@ -793,7 +794,7 @@
     }
 
     function onRequest(context, tokens, query, body) {
-        Object.entries(body).forEach(([k,v]) => {
+        Object.entries(body).forEach(([k, v]) => {
             console.log(`${k} ${v ? 'enabled' : 'disabled'}`);
             context.util[k] = v;
         });
@@ -931,7 +932,7 @@
          * @param {Object} data Value to store. Shallow merge will be performed!
          * @return {Object} Updated entry.
          */
-         function merge(collection, id, data) {
+        function merge(collection, id, data) {
             if (!collections.has(collection)) {
                 throw new ReferenceError('Collection does not exist: ' + collection);
             }
@@ -1091,20 +1092,20 @@
             }
 
             function register(body) {
-            
+
                 if (body.hasOwnProperty(identity) === false ||
                     body.hasOwnProperty('password') === false ||
                     body[identity].length == 0 ||
                     body.password.length == 0) {
-                        console.log(body.password.length );
+                    console.log(body.password.length);
                     throw new RequestError$2('Missing fields');
                 } else if (context.protectedStorage.query('users', { [identity]: body[identity] }).length !== 0) {
                     throw new ConflictError$1(`A user with the same ${identity} already exists`);
-                } else if(body.password != body.confirmPassword){
+                } else if (body.password != body.confirmPassword) {
                     throw new RequestError$2('Passwords do not match!');
-                } else if(body.password.length <= 4){
+                } else if (body.password.length <= 4) {
                     throw new RequestError$2('Password must be at least 5 characters long!');
-                } 
+                }
                 else {
                     const newUser = Object.assign({}, body, {
                         [identity]: body[identity],
@@ -1325,437 +1326,483 @@
 
     var identity = "email";
     var protectedData = {
-    	users: {
-    		"35c62d76-8152-4626-8712-eeb96381bea8": {
-    			email: "peter@abv.bg",
-    			username: "Peter",
-    			hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
-    		},
-    		"847ec027-f659-4086-8032-5173e2f9c93a": {
-    			email: "george@abv.bg",
-    			username: "George",
-    			hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
-    		},
-    		"60f0cf0b-34b0-4abd-9769-8c42f830dffc": {
-    			email: "admin@abv.bg",
-    			username: "Admin",
-    			hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
-    		},
+        users: {
+            "35c62d76-8152-4626-8712-eeb96381bea8": {
+                email: "peter@abv.bg",
+                username: "Peter",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
+            },
+            "847ec027-f659-4086-8032-5173e2f9c93a": {
+                email: "george@abv.bg",
+                username: "George",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
+            },
+            "60f0cf0b-34b0-4abd-9769-8c42f830dffc": {
+                email: "admin@abv.bg",
+                username: "Admin",
+                hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
+            },
             "c36c72f4-4c25-4aae-b3bc-49272a7994a1": {
-    			email: "vladonguyen@gmail.com",
-    			username: "Vladimir",
-    			hashedPassword: "f9556d736ca8f50a3ad91a008a572299bfeb2717a63a7569315ff7e1ba05396a"
-    		},
-    	},
-    	sessions: {
-    	}
+                email: "vladonguyen@gmail.com",
+                username: "Vladimir",
+                hashedPassword: "f9556d736ca8f50a3ad91a008a572299bfeb2717a63a7569315ff7e1ba05396a"
+            },
+        },
+        sessions: {
+        }
     };
     var seedData = {
-    	recipes: {
-    		"3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			name: "Easy Lasagna",
-    			img: "assets/lasagna.jpg",
-    			ingredients: [
-    				"1 tbsp Ingredient 1",
-    				"2 cups Ingredient 2",
-    				"500 g  Ingredient 3",
-    				"25 g Ingredient 4"
-    			],
-    			steps: [
-    				"Prepare ingredients",
-    				"Mix ingredients",
-    				"Cook until done"
-    			],
-    			_createdOn: 1613551279012
-    		},
-    		"8f414b4f-ab39-4d36-bedb-2ad69da9c830": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			name: "Grilled Duck Fillet",
-    			img: "assets/roast.jpg",
-    			ingredients: [
-    				"500 g  Ingredient 1",
-    				"3 tbsp Ingredient 2",
-    				"2 cups Ingredient 3"
-    			],
-    			steps: [
-    				"Prepare ingredients",
-    				"Mix ingredients",
-    				"Cook until done"
-    			],
-    			_createdOn: 1613551344360
-    		},
-    		"985d9eab-ad2e-4622-a5c8-116261fb1fd2": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			name: "Roast Trout",
-    			img: "assets/fish.jpg",
-    			ingredients: [
-    				"4 cups Ingredient 1",
-    				"1 tbsp Ingredient 2",
-    				"1 tbsp Ingredient 3",
-    				"750 g  Ingredient 4",
-    				"25 g Ingredient 5"
-    			],
-    			steps: [
-    				"Prepare ingredients",
-    				"Mix ingredients",
-    				"Cook until done"
-    			],
-    			_createdOn: 1613551388703
-    		}
-    	},
-    	comments: {
-    		"0a272c58-b7ea-4e09-a000-7ec988248f66": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			content: "Great recipe!",
-    			recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
-    			_createdOn: 1614260681375,
-    			_id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
-    		}
-    	},
-    	records: {
-    		i01: {
-    			name: "John1",
-    			val: 1,
-    			_createdOn: 1613551388703
-    		},
-    		i02: {
-    			name: "John2",
-    			val: 1,
-    			_createdOn: 1613551388713
-    		},
-    		i03: {
-    			name: "John3",
-    			val: 2,
-    			_createdOn: 1613551388723
-    		},
-    		i04: {
-    			name: "John4",
-    			val: 2,
-    			_createdOn: 1613551388733
-    		},
-    		i05: {
-    			name: "John5",
-    			val: 2,
-    			_createdOn: 1613551388743
-    		},
-    		i06: {
-    			name: "John6",
-    			val: 3,
-    			_createdOn: 1613551388753
-    		},
-    		i07: {
-    			name: "John7",
-    			val: 3,
-    			_createdOn: 1613551388763
-    		},
-    		i08: {
-    			name: "John8",
-    			val: 2,
-    			_createdOn: 1613551388773
-    		},
-    		i09: {
-    			name: "John9",
-    			val: 3,
-    			_createdOn: 1613551388783
-    		},
-    		i10: {
-    			name: "John10",
-    			val: 1,
-    			_createdOn: 1613551388793
-    		}
-    	},
-    	catches: {
-    		"07f260f4-466c-4607-9a33-f7273b24f1b4": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			angler: "Paulo Admorim",
-    			weight: 636,
-    			species: "Atlantic Blue Marlin",
-    			location: "Vitoria, Brazil",
-    			bait: "trolled pink",
-    			captureTime: 80,
-    			_createdOn: 1614760714812,
-    			_id: "07f260f4-466c-4607-9a33-f7273b24f1b4"
-    		},
-    		"bdabf5e9-23be-40a1-9f14-9117b6702a9d": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			angler: "John Does",
-    			weight: 554,
-    			species: "Atlantic Blue Marlin",
-    			location: "Buenos Aires, Argentina",
-    			bait: "trolled pink",
-    			captureTime: 120,
-    			_createdOn: 1614760782277,
-    			_id: "bdabf5e9-23be-40a1-9f14-9117b6702a9d"
-    		}
-    	},
-    	furniture: {
-    	},
-    	orders: {
-    	},
-    	movies: {
-    		"1240549d-f0e0-497e-ab99-eb8f703713d7": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			title: "Black Widow",
-    			description: "Natasha Romanoff aka Black Widow confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises. Comes on the screens 2020.",
-    			img: "https://miro.medium.com/max/735/1*akkAa2CcbKqHsvqVusF3-w.jpeg",
-    			_createdOn: 1614935055353,
-    			_id: "1240549d-f0e0-497e-ab99-eb8f703713d7"
-    		},
-    		"143e5265-333e-4150-80e4-16b61de31aa0": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			title: "Wonder Woman 1984",
-    			description: "Diana must contend with a work colleague and businessman, whose desire for extreme wealth sends the world down a path of destruction, after an ancient artifact that grants wishes goes missing.",
-    			img: "https://pbs.twimg.com/media/ETINgKwWAAAyA4r.jpg",
-    			_createdOn: 1614935181470,
-    			_id: "143e5265-333e-4150-80e4-16b61de31aa0"
-    		},
-    		"a9bae6d8-793e-46c4-a9db-deb9e3484909": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			title: "Top Gun 2",
-    			description: "After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him.",
-    			img: "https://i.pinimg.com/originals/f2/a4/58/f2a458048757bc6914d559c9e4dc962a.jpg",
-    			_createdOn: 1614935268135,
-    			_id: "a9bae6d8-793e-46c4-a9db-deb9e3484909"
-    		}
-    	},
-    	likes: {
-    	},
-    	ideas: {
-    		"833e0e57-71dc-42c0-b387-0ce0caf5225e": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			title: "Best Pilates Workout To Do At Home",
-    			description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima possimus eveniet ullam aspernatur corporis tempore quia nesciunt nostrum mollitia consequatur. At ducimus amet aliquid magnam nulla sed totam blanditiis ullam atque facilis corrupti quidem nisi iusto saepe, consectetur culpa possimus quos? Repellendus, dicta pariatur! Delectus, placeat debitis error dignissimos nesciunt magni possimus quo nulla, fuga corporis maxime minus nihil doloremque aliquam quia recusandae harum. Molestias dolorum recusandae commodi velit cum sapiente placeat alias rerum illum repudiandae? Suscipit tempore dolore autem, neque debitis quisquam molestias officia hic nesciunt? Obcaecati optio fugit blanditiis, explicabo odio at dicta asperiores distinctio expedita dolor est aperiam earum! Molestias sequi aliquid molestiae, voluptatum doloremque saepe dignissimos quidem quas harum quo. Eum nemo voluptatem hic corrupti officiis eaque et temporibus error totam numquam sequi nostrum assumenda eius voluptatibus quia sed vel, rerum, excepturi maxime? Pariatur, provident hic? Soluta corrupti aspernatur exercitationem vitae accusantium ut ullam dolor quod!",
-    			img: "./images/best-pilates-youtube-workouts-2__medium_4x3.jpg",
-    			_createdOn: 1615033373504,
-    			_id: "833e0e57-71dc-42c0-b387-0ce0caf5225e"
-    		},
-    		"247efaa7-8a3e-48a7-813f-b5bfdad0f46c": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			title: "4 Eady DIY Idea To Try!",
-    			description: "Similique rem culpa nemo hic recusandae perspiciatis quidem, quia expedita, sapiente est itaque optio enim placeat voluptates sit, fugit dignissimos tenetur temporibus exercitationem in quis magni sunt vel. Corporis officiis ut sapiente exercitationem consectetur debitis suscipit laborum quo enim iusto, labore, quod quam libero aliquid accusantium! Voluptatum quos porro fugit soluta tempore praesentium ratione dolorum impedit sunt dolores quod labore laudantium beatae architecto perspiciatis natus cupiditate, iure quia aliquid, iusto modi esse!",
-    			img: "./images/brightideacropped.jpg",
-    			_createdOn: 1615033452480,
-    			_id: "247efaa7-8a3e-48a7-813f-b5bfdad0f46c"
-    		},
-    		"b8608c22-dd57-4b24-948e-b358f536b958": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			title: "Dinner Recipe",
-    			description: "Consectetur labore et corporis nihil, officiis tempora, hic ex commodi sit aspernatur ad minima? Voluptas nesciunt, blanditiis ex nulla incidunt facere tempora laborum ut aliquid beatae obcaecati quidem reprehenderit consequatur quis iure natus quia totam vel. Amet explicabo quidem repellat unde tempore et totam minima mollitia, adipisci vel autem, enim voluptatem quasi exercitationem dolor cum repudiandae dolores nostrum sit ullam atque dicta, tempora iusto eaque! Rerum debitis voluptate impedit corrupti quibusdam consequatur minima, earum asperiores soluta. A provident reiciendis voluptates et numquam totam eveniet! Dolorum corporis libero dicta laborum illum accusamus ullam?",
-    			img: "./images/dinner.jpg",
-    			_createdOn: 1615033491967,
-    			_id: "b8608c22-dd57-4b24-948e-b358f536b958"
-    		}
-    	},
-    	catalog: {
-    		"53d4dbf5-7f41-47ba-b485-43eccb91cb95": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			make: "Table",
-    			model: "Swedish",
-    			year: 2015,
-    			description: "Medium table",
-    			price: 235,
-    			img: "./images/table.png",
-    			material: "Hardwood",
-    			_createdOn: 1615545143015,
-    			_id: "53d4dbf5-7f41-47ba-b485-43eccb91cb95"
-    		},
-    		"f5929b5c-bca4-4026-8e6e-c09e73908f77": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			make: "Sofa",
-    			model: "ES-549-M",
-    			year: 2018,
-    			description: "Three-person sofa, blue",
-    			price: 1200,
-    			img: "./images/sofa.jpg",
-    			material: "Frame - steel, plastic; Upholstery - fabric",
-    			_createdOn: 1615545572296,
-    			_id: "f5929b5c-bca4-4026-8e6e-c09e73908f77"
-    		},
-    		"c7f51805-242b-45ed-ae3e-80b68605141b": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			make: "Chair",
-    			model: "Bright Dining Collection",
-    			year: 2017,
-    			description: "Dining chair",
-    			price: 180,
-    			img: "./images/chair.jpg",
-    			material: "Wood laminate; leather",
-    			_createdOn: 1615546332126,
-    			_id: "c7f51805-242b-45ed-ae3e-80b68605141b"
-    		}
-    	},
-    	teams: {
-    		"34a1cab1-81f1-47e5-aec3-ab6c9810efe1": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			name: "Storm Troopers",
-    			logoUrl: "/assets/atat.png",
-    			description: "These ARE the droids we're looking for",
-    			_createdOn: 1615737591748,
-    			_id: "34a1cab1-81f1-47e5-aec3-ab6c9810efe1"
-    		},
-    		"dc888b1a-400f-47f3-9619-07607966feb8": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			name: "Team Rocket",
-    			logoUrl: "/assets/rocket.png",
-    			description: "Gotta catch 'em all!",
-    			_createdOn: 1615737655083,
-    			_id: "dc888b1a-400f-47f3-9619-07607966feb8"
-    		},
-    		"733fa9a1-26b6-490d-b299-21f120b2f53a": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			name: "Minions",
-    			logoUrl: "/assets/hydrant.png",
-    			description: "Friendly neighbourhood jelly beans, helping evil-doers succeed.",
-    			_createdOn: 1615737688036,
-    			_id: "733fa9a1-26b6-490d-b299-21f120b2f53a"
-    		}
-    	},
-    	members: {
-    		"cc9b0a0f-655d-45d7-9857-0a61c6bb2c4d": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			teamId: "34a1cab1-81f1-47e5-aec3-ab6c9810efe1",
-    			status: "member",
-    			_createdOn: 1616236790262,
-    			_updatedOn: 1616236792930
-    		},
-    		"61a19986-3b86-4347-8ca4-8c074ed87591": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			teamId: "dc888b1a-400f-47f3-9619-07607966feb8",
-    			status: "member",
-    			_createdOn: 1616237188183,
-    			_updatedOn: 1616237189016
-    		},
-    		"8a03aa56-7a82-4a6b-9821-91349fbc552f": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			teamId: "733fa9a1-26b6-490d-b299-21f120b2f53a",
-    			status: "member",
-    			_createdOn: 1616237193355,
-    			_updatedOn: 1616237195145
-    		},
-    		"9be3ac7d-2c6e-4d74-b187-04105ab7e3d6": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			teamId: "dc888b1a-400f-47f3-9619-07607966feb8",
-    			status: "member",
-    			_createdOn: 1616237231299,
-    			_updatedOn: 1616237235713
-    		},
-    		"280b4a1a-d0f3-4639-aa54-6d9158365152": {
-    			_ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
-    			teamId: "dc888b1a-400f-47f3-9619-07607966feb8",
-    			status: "member",
-    			_createdOn: 1616237257265,
-    			_updatedOn: 1616237278248
-    		},
-    		"e797fa57-bf0a-4749-8028-72dba715e5f8": {
-    			_ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
-    			teamId: "34a1cab1-81f1-47e5-aec3-ab6c9810efe1",
-    			status: "member",
-    			_createdOn: 1616237272948,
-    			_updatedOn: 1616237293676
-    		}
-    	},
-        blog:{
-            "240c440a-bca5-45be-b987-1fea1a433ebd":   {
-                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "HOW TO START A FOOD BLOG",
-                "imageUrl": "https://miro.medium.com/v2/resize:fit:550/1*ElUNWlNKjnhD1JCdxdNz6w.jpeg",
-                "imageUrlHome": "/img/bg-img/bg2.jpg",
-                "desc": "My blog as of jan 2022 is hosted on Bigscoots. Before that Nov 2017 onwards was hosted on WP Engine. Before that it was hosted on Bluehost servers for many years with a self-hosted WordPress engine and it uses Foodie theme. Do not worry if these words do not mean much. I did not know them too. And that is why I wanted to write this post. Read on.",
-                "articleContent": "My blog as of jan 2022 is hosted on Bigscoots. Before that Nov 2017 onwards was hosted on WP Engine. Before that it was hosted on Bluehost servers for many years with a self-hosted WordPress engine and it uses Foodie theme. Do not worry if these words do not mean much. I did not know them too. And that is why I wanted to write this post. Read on.\n\nI started my blog on blogger.com as that is what I knew about at the time. I was blogging infrequently, taking bad pictures and the recipes were written in any which way I felt like. Fast forward to some years down the line, when I started taking better pictures, when readers started finding me online, started cooking my food. In those years, I learnt to write better, learnt to develop recipes better, learnt photography all by myself and was often faced with the question of sticking it out on blogger or moving to wordpress. Eventually I moved to self hosted wordpress in 2014. Yes, before that it was all blogger.\n\nWhether you want to start a blog to post food, thoughts, other interests, whether you want to keep is small and personal or make a larger responsive website to reach a larger audience, you can do it much more easily now with numerous options available.",
-                "date": "2023-12-09",
-                "authorName": "Gabriela Ilieva",
-                "_createdOn": 1702087783862,
-                "_id": "240c440a-bca5-45be-b987-1fea1a433ebd"
+        recipes: {
+            "3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                name: "Easy Lasagna",
+                img: "assets/lasagna.jpg",
+                ingredients: [
+                    "1 tbsp Ingredient 1",
+                    "2 cups Ingredient 2",
+                    "500 g  Ingredient 3",
+                    "25 g Ingredient 4"
+                ],
+                steps: [
+                    "Prepare ingredients",
+                    "Mix ingredients",
+                    "Cook until done"
+                ],
+                _createdOn: 1613551279012
             },
-            "140c440a-bca5-45be-b987-1fea1a433ebd":   {
-                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "How to Go Vegan Easily and Healthily",
-                "imageUrl": "https://images.everydayhealth.com/images/what-is-a-vegan-diet-benefits-food-list-beginners-guide-alt-1440x810.jpg?sfvrsn=1d260c85_1",
-                "imageUrlHome": "/img/bg-img/bg3.jpg",
-                "desc": "This guide explains how to go vegan with minimal effort, in a lasting and healthy way. I’ve followed a vegan diet for more than thirty years, so I can offer tons of useful advice. By the time you finish reading, you’ll know exactly how to move forward.                ",
-                "articleContent": "Go about things the wrong way, and your vegan transition will demand massive willpower and struggle. This happens when you cut a bunch of non-vegan foods out of your diet, without having anything ready to eat instead. You’ll end up trying replacements you don’t like, having non-fulfilling meals, and generally feeling dissatisfied with your new diet.\n\nOr you can take the easy approach, which requires no sacrifice whatsoever.\n\nHere’s all you need to do to have an enjoyable and effortless transition: don’t seek to cut animal products out of your diet—instead, crowd them out.",
-                "date": "2023-12-09",
-                "authorName": "Gabriela Ilieva",
-                "_createdOn": 1702087783862,
-                "_id": "140c440a-bca5-45be-b987-1fea1a433ebd"
-            }
+            "8f414b4f-ab39-4d36-bedb-2ad69da9c830": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                name: "Grilled Duck Fillet",
+                img: "assets/roast.jpg",
+                ingredients: [
+                    "500 g  Ingredient 1",
+                    "3 tbsp Ingredient 2",
+                    "2 cups Ingredient 3"
+                ],
+                steps: [
+                    "Prepare ingredients",
+                    "Mix ingredients",
+                    "Cook until done"
+                ],
+                _createdOn: 1613551344360
             },
-            rezepte:{
-                "ac533703-b042-4785-baf7-aa4d8689d6f4":  {
-                    "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
-                    "title": "Perfect Vegan Cheese Salad",
-                    "prepTime": "15",
-                    "cookTime": "10",
-                    "servings": "2",
-                    "ingredients": "Leafy greens, colorful vegetables, vegan cheese, protein boosters, nuts, sunflower or pumpkin seeds",
-                    "imageUrl": "/img/bg-img/bg2.jpg",
-                    "imageUrlHome": "/img/bg-img/r1.jpg",
-                    "recipeContent": "Ingredients:\nLeafy Greens: Start with a base of fresh and crisp leafy greens like spinach, kale, or arugula.\n\nColorful Vegetables: Add a burst of color and nutrients with a mix of cherry tomatoes, bell peppers, cucumber, and shredded carrots.\n\nVegan Cheese: Choose your favorite vegan cheese or experiment with homemade varieties made from cashews, almonds, or soy.\n\nProtein Boosters: Elevate your salad with protein-rich additions like chickpeas, quinoa, or marinated tofu.\n\nNuts and Seeds: Sprinkle a handful of roasted nuts (walnuts, almonds, or pine nuts) and seeds (sunflower or pumpkin seeds) for added crunch.\n\nDressing: Create a tangy and flavorful dressing using olive oil, balsamic vinegar, Dijon mustard, and a touch of agave syrup.\n\nPreparation:\nWash and Chop: Rinse the leafy greens and chop the vegetables into bite-sized pieces.\n\nCheese Magic: Cube or crumble your chosen vegan cheese and distribute it evenly throughout the salad.\n\nProtein Power: Cook and prepare your chosen protein booster. For tofu, marinate it with your favorite flavors before pan-searing until golden.\n\nNutty Crunch: Toast the nuts and seeds in a dry pan for a few minutes until fragrant, then sprinkle them over the salad.\n\nDress to Impress: Whisk together the dressing ingredients and drizzle it over the salad just before serving.",
-                    "date": "",
-                    "authorName": "Vladimir Nguyen",
-                    "_createdOn": 1702166129265,
-                    "_id": "ac533703-b042-4785-baf7-aa4d8689d6f4"
-                },
-                "3480d41f-21a1-42d5-86d3-8eb0e1322f46":{
-                    "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
-                    "title": "Vegan Chickpea Curry",
-                    "prepTime": "15",
-                    "cookTime": "10",
-                    "servings": "2",
-                    "ingredients": " Chickpeas, onions, garlic, ginger, cumin, coriander, turmeric, garam masala, chili powder, tomatoes",    
-                     "imageUrl": "/img/bg-img/bg3.jpg",
-                     "imageUrlHome": "/img/bg-img/r2.jpg",
-                    "recipeContent": "Introduction\nEmbark on a culinary adventure with the Ultimate Vegan Chickpea Curry – a delightful journey into the heart of plant-based goodness. Bursting with rich flavors, aromatic spices, and wholesome ingredients, this curry is a celebration of vegan cuisine that promises to tantalize your taste buds. In this article, we will explore the magic behind this delectable dish, from its vibrant ingredients to the step-by-step preparation that makes it a favorite among those seeking a delicious and nutritious plant-based meal.\n\nThe Allure of Vegan Chickpea Curry\nAs plant-based lifestyles gain momentum, so does the appreciation for dishes that showcase the versatility and deliciousness of plant-derived ingredients. The Vegan Chickpea Curry is a shining example, bringing together the humble chickpea with an array of spices and vegetables to create a savory masterpiece.\n\nCrafting the Ultimate Vegan Chickpea Curry\nIngredients:\nChickpeas: A can of cooked chickpeas forms the hearty base of this curry.\n\nAromatics: Onions, garlic, and ginger form the flavor-packed trio that lays the foundation for a fragrant curry.\n\nSpices: A blend of cumin, coriander, turmeric, garam masala, and chili powder creates a symphony of spices that elevates the dish.\n\nTomatoes: Fresh or canned tomatoes provide a luscious base and acidity to balance the flavors.\n\nCoconut Milk: Creamy coconut milk adds richness and depth to the curry.\n\nVegetables: Customize your curry with a medley of vegetables such as spinach, bell peppers, and peas.\n\nFresh Herbs: Garnish with fresh cilantro or parsley for a burst of freshness.\n\nPreparation:\nSauté Aromatics: In a pan, sauté finely chopped onions, garlic, and ginger until golden brown.\n\nSpice Infusion: Add the spice blend and let it bloom in the aromatic base, releasing a fragrant symphony of flavors.\n\nTomato Magic: Incorporate diced tomatoes, cooking until they break down into a thick, flavorful sauce.\n\nChickpea Harmony: Introduce the chickpeas to the pot, allowing them to absorb the aromatic goodness.\n\nCreamy Indulgence: Pour in coconut milk, bringing a creamy and luxurious texture to the curry.\n\nVeggie Medley: Add your favorite vegetables, allowing them to cook until tender yet vibrant.\n\nHerbal Elegance: Finish with a generous sprinkle of fresh herbs, imparting a burst of color and freshness to the curry.\n\nWhy the Ultimate Vegan Chickpea Curry?\n1. Nutrient-Rich Goodness:\nProtein Power: Chickpeas are a rich source of plant-based protein, making this curry a satisfying and nutritious choice.\n\nVitamins and Minerals: Packed with vitamins and minerals from a variety of vegetables, promoting overall well-being.\n\n2. Flavor Explosion:\nSpice Harmony: The carefully curated blend of spices creates a symphony of flavors that dance on your palate.\n\nCustomizable: Adapt the recipe to your taste preferences by adding your favorite vegetables or adjusting spice levels.\n\n3. Vegan Delight:\nPlant-Powered: Celebrate the versatility and deliciousness of plant-based ingredients without compromising on taste.",
-                    "date": "2023-12-10",
-                    "authorName": "Vladimir Nguyen",
-                    "_createdOn": 1702166362183,
-                    "_id": "3480d41f-21a1-42d5-86d3-8eb0e1322f46"
-                },
-                "2480d41f-21a1-42d5-86d3-8eb0e1322f46":{
-                    "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
-                    "title": "Vegan Smoothie",
-                    "prepTime": "5",
-                    "cookTime": "2",
-                    "servings": "2",
-                    "ingredients": " Chickpeas, onions, garlic, ginger, cumin, coriander, turmeric, garam masala, chili powder, tomatoes",    
-                     "imageUrl": "/img/bg-img/bg3.jpg",
-                     "imageUrlHome": "/img/bg-img/r3.jpg",
-                    "recipeContent": "Introduction\nEmbark on a culinary adventure with the Ultimate Vegan Chickpea Curry – a delightful journey into the heart of plant-based goodness. Bursting with rich flavors, aromatic spices, and wholesome ingredients, this curry is a celebration of vegan cuisine that promises to tantalize your taste buds. In this article, we will explore the magic behind this delectable dish, from its vibrant ingredients to the step-by-step preparation that makes it a favorite among those seeking a delicious and nutritious plant-based meal.\n\nThe Allure of Vegan Chickpea Curry\nAs plant-based lifestyles gain momentum, so does the appreciation for dishes that showcase the versatility and deliciousness of plant-derived ingredients. The Vegan Chickpea Curry is a shining example, bringing together the humble chickpea with an array of spices and vegetables to create a savory masterpiece.\n\nCrafting the Ultimate Vegan Chickpea Curry\nIngredients:\nChickpeas: A can of cooked chickpeas forms the hearty base of this curry.\n\nAromatics: Onions, garlic, and ginger form the flavor-packed trio that lays the foundation for a fragrant curry.\n\nSpices: A blend of cumin, coriander, turmeric, garam masala, and chili powder creates a symphony of spices that elevates the dish.\n\nTomatoes: Fresh or canned tomatoes provide a luscious base and acidity to balance the flavors.\n\nCoconut Milk: Creamy coconut milk adds richness and depth to the curry.\n\nVegetables: Customize your curry with a medley of vegetables such as spinach, bell peppers, and peas.\n\nFresh Herbs: Garnish with fresh cilantro or parsley for a burst of freshness.\n\nPreparation:\nSauté Aromatics: In a pan, sauté finely chopped onions, garlic, and ginger until golden brown.\n\nSpice Infusion: Add the spice blend and let it bloom in the aromatic base, releasing a fragrant symphony of flavors.\n\nTomato Magic: Incorporate diced tomatoes, cooking until they break down into a thick, flavorful sauce.\n\nChickpea Harmony: Introduce the chickpeas to the pot, allowing them to absorb the aromatic goodness.\n\nCreamy Indulgence: Pour in coconut milk, bringing a creamy and luxurious texture to the curry.\n\nVeggie Medley: Add your favorite vegetables, allowing them to cook until tender yet vibrant.\n\nHerbal Elegance: Finish with a generous sprinkle of fresh herbs, imparting a burst of color and freshness to the curry.\n\nWhy the Ultimate Vegan Chickpea Curry?\n1. Nutrient-Rich Goodness:\nProtein Power: Chickpeas are a rich source of plant-based protein, making this curry a satisfying and nutritious choice.\n\nVitamins and Minerals: Packed with vitamins and minerals from a variety of vegetables, promoting overall well-being.\n\n2. Flavor Explosion:\nSpice Harmony: The carefully curated blend of spices creates a symphony of flavors that dance on your palate.\n\nCustomizable: Adapt the recipe to your taste preferences by adding your favorite vegetables or adjusting spice levels.\n\n3. Vegan Delight:\nPlant-Powered: Celebrate the versatility and deliciousness of plant-based ingredients without compromising on taste.",
-                    "date": "2023-12-10",
-                    "authorName": "Vladimir Nguyen",
-                    "_createdOn": 1702166362183,
-                    "_id": "2480d41f-21a1-42d5-86d3-8eb0e1322f46"
-                }
+            "985d9eab-ad2e-4622-a5c8-116261fb1fd2": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                name: "Roast Trout",
+                img: "assets/fish.jpg",
+                ingredients: [
+                    "4 cups Ingredient 1",
+                    "1 tbsp Ingredient 2",
+                    "1 tbsp Ingredient 3",
+                    "750 g  Ingredient 4",
+                    "25 g Ingredient 5"
+                ],
+                steps: [
+                    "Prepare ingredients",
+                    "Mix ingredients",
+                    "Cook until done"
+                ],
+                _createdOn: 1613551388703
             }
+        },
+        comments: {
+            "0a272c58-b7ea-4e09-a000-7ec988248f66": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                content: "Great recipe!",
+                recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
+                _createdOn: 1614260681375,
+                _id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
+            }
+        },
+        records: {
+            i01: {
+                name: "John1",
+                val: 1,
+                _createdOn: 1613551388703
+            },
+            i02: {
+                name: "John2",
+                val: 1,
+                _createdOn: 1613551388713
+            },
+            i03: {
+                name: "John3",
+                val: 2,
+                _createdOn: 1613551388723
+            },
+            i04: {
+                name: "John4",
+                val: 2,
+                _createdOn: 1613551388733
+            },
+            i05: {
+                name: "John5",
+                val: 2,
+                _createdOn: 1613551388743
+            },
+            i06: {
+                name: "John6",
+                val: 3,
+                _createdOn: 1613551388753
+            },
+            i07: {
+                name: "John7",
+                val: 3,
+                _createdOn: 1613551388763
+            },
+            i08: {
+                name: "John8",
+                val: 2,
+                _createdOn: 1613551388773
+            },
+            i09: {
+                name: "John9",
+                val: 3,
+                _createdOn: 1613551388783
+            },
+            i10: {
+                name: "John10",
+                val: 1,
+                _createdOn: 1613551388793
+            }
+        },
+        catches: {
+            "07f260f4-466c-4607-9a33-f7273b24f1b4": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                angler: "Paulo Admorim",
+                weight: 636,
+                species: "Atlantic Blue Marlin",
+                location: "Vitoria, Brazil",
+                bait: "trolled pink",
+                captureTime: 80,
+                _createdOn: 1614760714812,
+                _id: "07f260f4-466c-4607-9a33-f7273b24f1b4"
+            },
+            "bdabf5e9-23be-40a1-9f14-9117b6702a9d": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                angler: "John Does",
+                weight: 554,
+                species: "Atlantic Blue Marlin",
+                location: "Buenos Aires, Argentina",
+                bait: "trolled pink",
+                captureTime: 120,
+                _createdOn: 1614760782277,
+                _id: "bdabf5e9-23be-40a1-9f14-9117b6702a9d"
+            }
+        },
+        furniture: {
+        },
+        orders: {
+        },
+        movies: {
+            "1240549d-f0e0-497e-ab99-eb8f703713d7": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                title: "Black Widow",
+                description: "Natasha Romanoff aka Black Widow confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises. Comes on the screens 2020.",
+                img: "https://miro.medium.com/max/735/1*akkAa2CcbKqHsvqVusF3-w.jpeg",
+                _createdOn: 1614935055353,
+                _id: "1240549d-f0e0-497e-ab99-eb8f703713d7"
+            },
+            "143e5265-333e-4150-80e4-16b61de31aa0": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                title: "Wonder Woman 1984",
+                description: "Diana must contend with a work colleague and businessman, whose desire for extreme wealth sends the world down a path of destruction, after an ancient artifact that grants wishes goes missing.",
+                img: "https://pbs.twimg.com/media/ETINgKwWAAAyA4r.jpg",
+                _createdOn: 1614935181470,
+                _id: "143e5265-333e-4150-80e4-16b61de31aa0"
+            },
+            "a9bae6d8-793e-46c4-a9db-deb9e3484909": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                title: "Top Gun 2",
+                description: "After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him.",
+                img: "https://i.pinimg.com/originals/f2/a4/58/f2a458048757bc6914d559c9e4dc962a.jpg",
+                _createdOn: 1614935268135,
+                _id: "a9bae6d8-793e-46c4-a9db-deb9e3484909"
+            }
+        },
+        likes: {
+        },
+        ideas: {
+            "833e0e57-71dc-42c0-b387-0ce0caf5225e": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                title: "Best Pilates Workout To Do At Home",
+                description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima possimus eveniet ullam aspernatur corporis tempore quia nesciunt nostrum mollitia consequatur. At ducimus amet aliquid magnam nulla sed totam blanditiis ullam atque facilis corrupti quidem nisi iusto saepe, consectetur culpa possimus quos? Repellendus, dicta pariatur! Delectus, placeat debitis error dignissimos nesciunt magni possimus quo nulla, fuga corporis maxime minus nihil doloremque aliquam quia recusandae harum. Molestias dolorum recusandae commodi velit cum sapiente placeat alias rerum illum repudiandae? Suscipit tempore dolore autem, neque debitis quisquam molestias officia hic nesciunt? Obcaecati optio fugit blanditiis, explicabo odio at dicta asperiores distinctio expedita dolor est aperiam earum! Molestias sequi aliquid molestiae, voluptatum doloremque saepe dignissimos quidem quas harum quo. Eum nemo voluptatem hic corrupti officiis eaque et temporibus error totam numquam sequi nostrum assumenda eius voluptatibus quia sed vel, rerum, excepturi maxime? Pariatur, provident hic? Soluta corrupti aspernatur exercitationem vitae accusantium ut ullam dolor quod!",
+                img: "./images/best-pilates-youtube-workouts-2__medium_4x3.jpg",
+                _createdOn: 1615033373504,
+                _id: "833e0e57-71dc-42c0-b387-0ce0caf5225e"
+            },
+            "247efaa7-8a3e-48a7-813f-b5bfdad0f46c": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                title: "4 Eady DIY Idea To Try!",
+                description: "Similique rem culpa nemo hic recusandae perspiciatis quidem, quia expedita, sapiente est itaque optio enim placeat voluptates sit, fugit dignissimos tenetur temporibus exercitationem in quis magni sunt vel. Corporis officiis ut sapiente exercitationem consectetur debitis suscipit laborum quo enim iusto, labore, quod quam libero aliquid accusantium! Voluptatum quos porro fugit soluta tempore praesentium ratione dolorum impedit sunt dolores quod labore laudantium beatae architecto perspiciatis natus cupiditate, iure quia aliquid, iusto modi esse!",
+                img: "./images/brightideacropped.jpg",
+                _createdOn: 1615033452480,
+                _id: "247efaa7-8a3e-48a7-813f-b5bfdad0f46c"
+            },
+            "b8608c22-dd57-4b24-948e-b358f536b958": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                title: "Dinner Recipe",
+                description: "Consectetur labore et corporis nihil, officiis tempora, hic ex commodi sit aspernatur ad minima? Voluptas nesciunt, blanditiis ex nulla incidunt facere tempora laborum ut aliquid beatae obcaecati quidem reprehenderit consequatur quis iure natus quia totam vel. Amet explicabo quidem repellat unde tempore et totam minima mollitia, adipisci vel autem, enim voluptatem quasi exercitationem dolor cum repudiandae dolores nostrum sit ullam atque dicta, tempora iusto eaque! Rerum debitis voluptate impedit corrupti quibusdam consequatur minima, earum asperiores soluta. A provident reiciendis voluptates et numquam totam eveniet! Dolorum corporis libero dicta laborum illum accusamus ullam?",
+                img: "./images/dinner.jpg",
+                _createdOn: 1615033491967,
+                _id: "b8608c22-dd57-4b24-948e-b358f536b958"
+            }
+        },
+        catalog: {
+            "53d4dbf5-7f41-47ba-b485-43eccb91cb95": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                make: "Table",
+                model: "Swedish",
+                year: 2015,
+                description: "Medium table",
+                price: 235,
+                img: "./images/table.png",
+                material: "Hardwood",
+                _createdOn: 1615545143015,
+                _id: "53d4dbf5-7f41-47ba-b485-43eccb91cb95"
+            },
+            "f5929b5c-bca4-4026-8e6e-c09e73908f77": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                make: "Sofa",
+                model: "ES-549-M",
+                year: 2018,
+                description: "Three-person sofa, blue",
+                price: 1200,
+                img: "./images/sofa.jpg",
+                material: "Frame - steel, plastic; Upholstery - fabric",
+                _createdOn: 1615545572296,
+                _id: "f5929b5c-bca4-4026-8e6e-c09e73908f77"
+            },
+            "c7f51805-242b-45ed-ae3e-80b68605141b": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                make: "Chair",
+                model: "Bright Dining Collection",
+                year: 2017,
+                description: "Dining chair",
+                price: 180,
+                img: "./images/chair.jpg",
+                material: "Wood laminate; leather",
+                _createdOn: 1615546332126,
+                _id: "c7f51805-242b-45ed-ae3e-80b68605141b"
+            }
+        },
+        teams: {
+            "34a1cab1-81f1-47e5-aec3-ab6c9810efe1": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                name: "Storm Troopers",
+                logoUrl: "/assets/atat.png",
+                description: "These ARE the droids we're looking for",
+                _createdOn: 1615737591748,
+                _id: "34a1cab1-81f1-47e5-aec3-ab6c9810efe1"
+            },
+            "dc888b1a-400f-47f3-9619-07607966feb8": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                name: "Team Rocket",
+                logoUrl: "/assets/rocket.png",
+                description: "Gotta catch 'em all!",
+                _createdOn: 1615737655083,
+                _id: "dc888b1a-400f-47f3-9619-07607966feb8"
+            },
+            "733fa9a1-26b6-490d-b299-21f120b2f53a": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                name: "Minions",
+                logoUrl: "/assets/hydrant.png",
+                description: "Friendly neighbourhood jelly beans, helping evil-doers succeed.",
+                _createdOn: 1615737688036,
+                _id: "733fa9a1-26b6-490d-b299-21f120b2f53a"
+            }
+        },
+        members: {
+            "cc9b0a0f-655d-45d7-9857-0a61c6bb2c4d": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                teamId: "34a1cab1-81f1-47e5-aec3-ab6c9810efe1",
+                status: "member",
+                _createdOn: 1616236790262,
+                _updatedOn: 1616236792930
+            },
+            "61a19986-3b86-4347-8ca4-8c074ed87591": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                teamId: "dc888b1a-400f-47f3-9619-07607966feb8",
+                status: "member",
+                _createdOn: 1616237188183,
+                _updatedOn: 1616237189016
+            },
+            "8a03aa56-7a82-4a6b-9821-91349fbc552f": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                teamId: "733fa9a1-26b6-490d-b299-21f120b2f53a",
+                status: "member",
+                _createdOn: 1616237193355,
+                _updatedOn: 1616237195145
+            },
+            "9be3ac7d-2c6e-4d74-b187-04105ab7e3d6": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                teamId: "dc888b1a-400f-47f3-9619-07607966feb8",
+                status: "member",
+                _createdOn: 1616237231299,
+                _updatedOn: 1616237235713
+            },
+            "280b4a1a-d0f3-4639-aa54-6d9158365152": {
+                _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                teamId: "dc888b1a-400f-47f3-9619-07607966feb8",
+                status: "member",
+                _createdOn: 1616237257265,
+                _updatedOn: 1616237278248
+            },
+            "e797fa57-bf0a-4749-8028-72dba715e5f8": {
+                _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                teamId: "34a1cab1-81f1-47e5-aec3-ab6c9810efe1",
+                status: "member",
+                _createdOn: 1616237272948,
+                _updatedOn: 1616237293676
+            }
+        },
+        blog: {
+            "ef7c5a31-067c-43a7-a996-ab070910a4ca": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "title": "15 Vegan Dishes With Up to 26 Grams of Protein",
+                "imageUrl": "/img/blog-img/15VeganDishesWithUpto26GramsofProtein.jpeg",
+                "desc": "A vegan diet rich in vegetables, fruits, whole grains, nuts and seeds has been shown to lower the risk of chronic diseases like Type 2 diabetes and some types of cancer. It’s often a myth that you can’t get enough protein on a vegan diet. In reality, beans, legumes, tofu and chickpeas are all great meatless sources of protein.",
+                "date": "2023-12-18",
+                "authorName": "Peter Smith",
+                "articleContent": "<p>A vegan diet rich in vegetables, fruits, whole grains, nuts and seeds has been shown to lower the risk of chronic diseases like Type 2 diabetes and some types of cancer. It’s often<strong> a myth that you can’t get enough protein on a vegan diet</strong>. In reality, beans, legumes, tofu and chickpeas are all great meatless sources of protein.</p><p>Even if you’re not fully vegan, you can still reap the benefits of eating more plant-based meals. Try incorporating some of these tasty vegan recipes into your diet, which feature up to 21 grams of protein per serving.</p><p><strong>In addition to the health benefits,</strong> adopting a plant-based diet can contribute to environmental sustainability. Animal agriculture is a significant contributor to greenhouse gas emissions, deforestation, and water pollution. By choosing plant-based meals, you can reduce your carbon footprint and support a more environmentally friendly lifestyle. Sustainable choices in our diets play a crucial role in addressing global concerns about climate change and resource conservation.</p><p>Moreover, embracing a vegan or plant-based diet doesn't mean sacrificing flavor and variety. The world of plant-based cuisine offers <strong>an abundance of delicious options</strong> that cater to diverse tastes and cultural preferences. From vibrant salads and hearty grain bowls to innovative plant-based burgers and desserts, exploring the richness of plant-based recipes can be a delightful culinary adventure. Many individuals find that incorporating more plant-based meals into their diet not only improves their health but also introduces them to a broader spectrum of flavors and culinary creativity.</p><p>As plant-based diets gain popularity, there is a growing availability of vegan alternatives and plant-based products in supermarkets and restaurants. This makes it increasingly convenient for individuals to explore and adopt a more plant-focused approach to their meals. Whether you're motivated by health concerns, environmental consciousness, or a desire to try new and exciting flavors, the versatility and nutritional benefits of plant-based eating make it an appealing and accessible choice for many.</p>",
+                "_createdOn": 1702927892154,
+                "_id": "ef7c5a31-067c-43a7-a996-ab070910a4ca"
+            },
+            "87b551c7-59d8-4be5-b54d-8262068a7621": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "title": "What is a vegan diet benefits food list?",
+                "imageUrl": "/img/blog-img/what-is-a-vegan-diet-benefits-food-list-beginners-guide-alt-1440x810.jpg",
+                "desc": "A vegan diet, characterized by the exclusion of all animal products, offers numerous health benefits and contributes to ethical and environmental considerations. The foundation of a vegan diet lies in plant-based foods, including vegetables, fruits, whole grains, legumes, nuts, and seeds.",
+                "date": "2023-12-18",
+                "authorName": "Peter Smith",
+                "articleContent": "<p>A vegan diet, characterized by the exclusion of all animal products, offers numerous health benefits and contributes to ethical and environmental considerations. The foundation of a vegan diet lies in plant-based foods, including vegetables, fruits, whole grains, legumes, nuts, and seeds. These foods are r<strong>ich in essential nutrients, vitamins, and antioxidants, promoting overall well-being and reducing the risk of chronic diseases. </strong>One notable advantage of a vegan diet is its positive impact on heart health. Studies have shown that individuals adhering to a vegan lifestyle tend to have lower cholesterol levels, blood pressure, and a reduced risk of heart disease.</p><p>In addition to <strong>cardiovascular health, a vegan diet has been associated with better weight management and a lower risk of Type 2 diabetes. </strong>The emphasis on fiber-rich foods in a plant-based diet helps regulate blood sugar levels and contributes to a healthy metabolism. Moreover, the exclusion of animal products eliminates saturated fats found in meat and dairy, further supporting weight control. Plant-based diets have also been linked to a lower incidence of certain types of cancer, particularly colorectal, breast, and prostate cancers. The antioxidants and phytochemicals abundant in plant foods play a crucial role in preventing cellular damage and supporting the body's defense mechanisms against cancer.</p><p><em>Furthermore, adopting a vegan lifestyle aligns with ethical considerations</em>, as it promotes compassion toward animals and encourages sustainable practices. Factory farming and industrial animal agriculture contribute significantly to environmental degradation, deforestation, and greenhouse gas emissions. By choosing a vegan diet, individuals contribute to reducing their ecological footprint and supporting a more environmentally conscious way of living. The food choices we make can be powerful agents for positive change, impacting both personal health and the well-being of the planet.</p>",
+                "_createdOn": 1702928129642,
+                "_id": "87b551c7-59d8-4be5-b54d-8262068a7621"
+            }
+        },
+        rezepte: {
+            "f5ae949b-c1fe-4feb-b501-6a4920134d8b": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "title": "Avocado Salad Recipe",
+                "prepTime": "5",
+                "cookTime": "20",
+                "servings": "2",
+                "ingredients": "2 ripe avocados, 1 cup cherry tomatoes, 1 cucumber, 1/4 red onion, 1/4 cup fresh cilantro, Juice of 1 lime, 2 tablespoons extra-virgin olive oil, Salt and pepper to taste",
+                "imageUrl": "/img/rezepte/avocado-salad.jpg",
+                "imageUrlHome": "/img/rezepte/avocado-salad-sq.jpg",
+                "date": "2023-12-18",
+                "authorName": "Peter Smith",
+                "recipeContent": "<p><strong>Prepare the Vegetables:</strong></p><p>Wash and dice the avocados, cherry tomatoes, and cucumber.</p><p>Finely slice the red onion.</p><p>Chop the fresh cilantro.</p><p><br></p><p><strong>Combine Ingredients:</strong></p><p>In a large salad bowl, combine the diced avocados, cherry tomatoes, cucumber, red onion, and cilantro.</p><p><br></p><p><strong>Make the Dressing:</strong></p><p>In a small bowl, whisk together the lime juice, extra-virgin olive oil, salt, and pepper. Adjust the seasoning to taste.</p><p><br></p><p><strong>Drizzle the Dressing:</strong></p><p>Pour the dressing over the salad ingredients.</p><p><br></p><p><strong>Gently Toss:</strong></p><p>Gently toss the salad to coat all the ingredients with the dressing. Be careful not to mash the avocados.</p><p><br></p><p><strong>Serve:</strong></p><p>Serve the avocado salad immediately as a refreshing side dish or as a standalone light meal.</p><p>This Avocado Salad is not only healthy and nutritious but also bursting with vibrant colors and flavors. It's perfect for a quick lunch, a side dish at dinner, or a refreshing addition to any summer gathering. Feel free to customize the recipe by adding your favorite ingredients such as grilled corn, black beans, or radishes. Enjoy your delicious and satisfying Avocado Salad!</p>",
+                "_createdOn": 1702929371913,
+                "_id": "f5ae949b-c1fe-4feb-b501-6a4920134d8b"
+            },
+            "1a3cdf71-644c-464b-a119-92297850b417": {
+                "title": "Easy Blueberry Smoothie",
+                "prepTime": "2",
+                "cookTime": "5",
+                "servings": "3",
+                "ingredients": "1 ¼ cup blueberries, 1 medium ripe banana, Half of a medium orange, 3/4 cup to 1 cup vegan milk",
+                "imageUrl": "/img/rezepte/smoothie-2.jpg",
+                "imageUrlHome": "/img/rezepte/smoothie-2-sq.jpg",
+                "date": "2023-12-18",
+                "authorName": "Peter Smith",
+                "recipeContent": "<p><strong>For the best blueberry smoothie, use frozen blueberries!</strong>&nbsp;Here’s our<strong>&nbsp;</strong>go-to recipe!&nbsp;You need less than five minutes to make this easy blueberry smoothie.</p><p><br></p><p><strong>BASIC SMOOTHIE</strong></p><p>•1 ¼ cup blueberries, preferably frozen</p><p>•1 medium ripe banana or use 1 cup frozen banana slices</p><p>•Half of a medium orange, peeled and quartered</p><p>•3/4 cup to 1 cup milk, dairy or non-dairy</p><p><br></p><p><strong>OPTIONAL INGREDIENTS</strong></p><p>•1 tablespoon almond butter, peanut butter or cashew butter</p><p>•1 teaspoon chia seeds</p><p>•1 teaspoon hemp seeds</p><p>•1 teaspoon flax seeds</p><p>•1 teaspoon honey or maple syrup</p>",
+                "_createdOn": 1702929685025,
+                "_updatedOn": 1702929775853,
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "_id": "1a3cdf71-644c-464b-a119-92297850b417"
+            },
+            "9bfef7fb-32e3-4a92-b2e5-bd1217fd7e20": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "title": "Raw vegan fruit cake",
+                "prepTime": "30",
+                "cookTime": "60",
+                "servings": "8",
+                "ingredients": "1 cup raw almonds, 1 cup raw walnuts, 1 cup pitted dates, 1/2 cup dried figs, 1/2 cup dried apricots, 1/2 cup raisins, 1 teaspoon vanilla extract, 1 teaspoon ground cinnamon, A pinch of salt, 1 cup raw cashews (soaked), 1/4 cup melted coconut oil, 1/4 cup maple syrup or agave nectar, Juice of 1 lemon, 1 teaspoon vanilla extract",
+                "imageUrl": "/img/rezepte/torta-nadia.png",
+                "imageUrlHome": "/img/rezepte/torta-nadia-sq.png",
+                "date": "2023-12-18",
+                "authorName": "Peter Smith",
+                "recipeContent": "<p><strong>Prepare the Cake:</strong></p><p>In a food processor, combine almonds and walnuts. Process until finely ground.</p><p>Add dates, figs, apricots, raisins, vanilla extract, cinnamon, and a pinch of salt. Process until the mixture sticks together and forms a dough-like consistency.</p><p><strong>Press into a Pan:</strong></p><p>Line a cake pan with parchment paper.</p><p>Press the mixture evenly into the pan to form the base of the cake. Ensure it's compact and smooth.</p><p><strong>Prepare the Frosting:</strong></p><p>In a high-speed blender, combine soaked cashews, melted coconut oil, maple syrup or agave nectar, lemon juice, vanilla extract, and a pinch of salt.</p><p>Blend until the frosting is smooth and creamy.</p><p><strong>Frost the Cake:</strong></p><p>Spread the frosting evenly over the cake base.</p><p><strong>Chill:</strong></p><p>Place the cake in the refrigerator for at least 4 hours or until the frosting is set.</p><p><strong>Decorate:</strong></p><p>Once set, decorate the top with fresh fruits, such as berries, kiwi, or sliced citrus.</p><p><strong>Serve:</strong></p><p>Slice and serve your delicious Raw Vegan Fruit Cake. Enjoy the burst of natural flavors and nutrient-packed goodness!</p><p><br></p><p><em>This Raw Vegan Fruit Cake is not only a healthier alternative but also a delightful treat for those who appreciate the goodness of raw, plant-based ingredients. Feel free to get creative with the fruit toppings and adjust sweetness according to your preference.</em></p>",
+                "_createdOn": 1702929979799,
+                "_id": "9bfef7fb-32e3-4a92-b2e5-bd1217fd7e20"
+            },
+            "c53995b4-dd51-46e6-8520-55f88b2ed721": {
+                "title": "Vegan asian special",
+                "prepTime": "10",
+                "cookTime": "30",
+                "servings": "3",
+                "ingredients": "1 cup firm tofu, 2 cups mixed vegetables (such as broccoli, bell peppers, and snap peas), 1 cup sliced mushrooms, 1/2 cup sliced water chestnuts, 1/4 cup soy sauce, 2 tablespoons hoisin sauce, 1 tablespoon sesame oil, 1 tablespoon rice vinegar, 1 tablespoon maple syrup or agave nectar, 2 cloves garlic (minced), 1 teaspoon grated ginger, 2 green onions (sliced), 1 tablespoon vegetable oil, Sesame seeds and chopped cilantro for garnish, Cooked rice ",
+                "imageUrl": "/img/rezepte/asian-dish.jpg",
+                "imageUrlHome": "/img/rezepte/asian-dish-sq.jpg",
+                "date": "2023-12-18",
+                "authorName": "Vladimir Nguyen",
+                "recipeContent": "<p><strong>Prepare Tofu:</strong></p><p>Press the tofu to remove excess water, then cut it into cubes.</p><p><strong>Stir-Fry Tofu:</strong></p><p>In a large pan or wok, heat vegetable oil over medium-high heat.</p><p>Add tofu cubes and stir-fry until golden brown. Remove tofu from the pan and set aside.</p><p><strong>Prepare Vegetables:</strong></p><p>In the same pan, add a bit more oil if needed.</p><p>Stir in garlic and ginger until fragrant.</p><p>Add mixed vegetables, mushrooms, and water chestnuts. Stir-fry until the vegetables are tender-crisp.</p><p><strong>Combine Sauce:</strong></p><p>In a bowl, whisk together soy sauce, hoisin sauce, sesame oil, rice vinegar, and maple syrup or agave nectar.</p><p><strong>Combine Ingredients:</strong></p><p>Return the cooked tofu to the pan with the vegetables.</p><p>Pour the sauce over the tofu and vegetables, tossing to coat evenly.</p><p><strong>Finish and Garnish:</strong></p><p>Stir in sliced green onions and cook for an additional minute.</p><p>Garnish with sesame seeds and chopped cilantro.</p><p><strong>Serve:</strong></p><p>Serve the Vegan Asian Special Dish over cooked rice or noodles.</p><p>Enjoy this flavorful and satisfying vegan Asian dish that combines the goodness of tofu and a variety of colorful vegetables with a delicious homemade Asian-inspired sauce! Adjust the spice level and customize the vegetables according to your preferences.</p>",
+                "_createdOn": 1702930442319,
+                "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
+                "_updatedOn": 1702930470325,
+                "_id": "c53995b4-dd51-46e6-8520-55f88b2ed721"
+            },
+            "46ab5a84-9f9d-4a0c-8fed-17ca332cd794": {
+                "title": "Vegan Alfredo pasta ",
+                "prepTime": "20",
+                "cookTime": "30",
+                "servings": "4",
+                "ingredients": "1 cup raw cashews, soaked in hot water for 1 hour, 2 cups cauliflower florets, 3 cloves garlic, 1 cup unsweetened almond milk, 1/4 cup nutritional yeast, 2 tablespoons lemon juice, 1 teaspoon white miso paste, Salt and pepper to taste, 8 oz fettuccine pasta",
+                "imageUrl": "/img/rezepte/alfredo_Lede.webp",
+                "imageUrlHome": "/img/rezepte/alfredo_Lede-sq.webp",
+                "date": "2023-12-18",
+                "authorName": "Vladimir Nguyen",
+                "recipeContent": "<p><strong>Prepare the Sauce:</strong></p><p>In a blender, combine soaked cashews, cauliflower florets, garlic, almond milk, nutritional yeast, lemon juice, miso paste, salt, and pepper.</p><p>Blend until smooth and creamy, adjusting consistency with additional almond milk if needed.</p><p><strong>Cook the Pasta:</strong></p><p>Cook the fettuccine pasta according to the package instructions until al dente.</p><p>Reserve a cup of pasta cooking water before draining.</p><p><strong>Combine Pasta and Sauce:</strong></p><p>In a large pan, combine the cooked pasta and the prepared Alfredo sauce.</p><p>Toss the pasta, coating it evenly with the creamy sauce.</p><p><strong>Adjust Consistency:</strong></p><p>If the sauce is too thick, gradually add some of the reserved pasta cooking water until the desired consistency is reached.</p><p><strong>Season and Serve:</strong></p><p>Taste and adjust the seasoning with salt and pepper as needed.</p><p>Serve the Vegan Alfredo Pasta in bowls, garnished with fresh parsley.</p><p>Optional Additions:</p><p><br></p><p><em>Customize your pasta by adding sautéed mushrooms, spinach, or peas for extra flavor and nutrition.</em></p>",
+                "_createdOn": 1702930727462,
+                "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
+                "_updatedOn": 1702930757904,
+                "_id": "46ab5a84-9f9d-4a0c-8fed-17ca332cd794"
+            },
+            "6205e4fb-3f95-4084-9e69-30e2855784d6": {
+                "_ownerId": "c36c72f4-4c25-4aae-b3bc-49272a7994a1",
+                "title": "Sweet potato & peanut curry",
+                "prepTime": "10",
+                "cookTime": "30",
+                "servings": "4",
+                "ingredients": "1 tbsp coconut oil, 1 chopped onion, 2 grated garlic cloves, thumb-sized piece of grated ginger, 3 tbsp Thai red curry paste (check the label to make sure it’s vegetarian/vegan), 1 tbsp smooth peanut butter, 500g sweet potato (peeled and cut into chunks), 400ml can coconut milk, 200g bag spinach, 1 lime (juiced), cooked rice to serve (optional), dry roasted peanuts to serve",
+                "imageUrl": "/img/rezepte/vegan-food-instagram.jpg",
+                "imageUrlHome": "/img/rezepte/vegan-food-instagram-sq.jpg",
+                "date": "2023-12-18",
+                "authorName": "Vladimir Nguyen",
+                "recipeContent": "<p><strong>STEP 1</strong></p><p>Melt 1 tbsp coconut oil in a saucepan over a medium heat and soften 1 chopped onion for 5 mins. Add 2 grated garlic cloves and a grated thumb-sized piece of ginger, and cook for 1 min until fragrant.</p><p><br></p><p><strong>STEP 2</strong></p><p>Stir in 3 tbsp Thai red curry paste, 1 tbsp smooth peanut butter and 500g sweet potato, peeled and cut into chunks, then add 400ml coconut milk and 200ml water.</p><p><br></p><p><strong>STEP 3</strong></p><p>Bring to the boil, turn down the heat and simmer, uncovered, for 25-30 mins or until the sweet potato is soft.</p><p><br></p><p><strong>STEP 4</strong></p><p>Stir through 200g spinach and the juice of 1 lime, and season well. Serve with cooked rice, and if you want some crunch, sprinkle over a few dry roasted peanuts.</p>",
+                "_createdOn": 1702930930339,
+                "_id": "6205e4fb-3f95-4084-9e69-30e2855784d6"
+            }
+        }
     };
     var rules$1 = {
-    	users: {
-    		".create": false,
-    		".read": [
-    			"Owner"
-    		],
-    		".update": false,
-    		".delete": false
-    	},
-    	members: {
-    		".update": "isOwner(user, get('teams', data.teamId))",
-    		".delete": "isOwner(user, get('teams', data.teamId)) || isOwner(user, data)",
-    		"*": {
-    			teamId: {
-    				".update": "newData.teamId = data.teamId"
-    			},
-    			status: {
-    				".create": "newData.status = 'pending'"
-    			}
-    		}
-    	}
+        users: {
+            ".create": false,
+            ".read": [
+                "Owner"
+            ],
+            ".update": false,
+            ".delete": false
+        },
+        members: {
+            ".update": "isOwner(user, get('teams', data.teamId))",
+            ".delete": "isOwner(user, get('teams', data.teamId)) || isOwner(user, data)",
+            "*": {
+                teamId: {
+                    ".update": "newData.teamId = data.teamId"
+                },
+                status: {
+                    ".create": "newData.status = 'pending'"
+                }
+            }
+        }
     };
     var settings = {
-    	identity: identity,
-    	protectedData: protectedData,
-    	seedData: seedData,
-    	rules: rules$1
+        identity: identity,
+        protectedData: protectedData,
+        seedData: seedData,
+        rules: rules$1
     };
 
     const plugins = [
