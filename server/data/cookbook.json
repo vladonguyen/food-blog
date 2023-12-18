@@ -1,6 +1,6 @@
 {
-	"recipes": {
-		"01": {
+    "recipes": {
+        "01": {
             "_id": "01",
             "name": "Recipe 1",
             "img": "assets/lasagna.jpg"
@@ -15,7 +15,7 @@
             "name": "Recipe 3",
             "img": "assets/fish.jpg"
         }
-	},
+    },
     "details": {
         "01": {
             "_id": "01",

@@ -1,11 +1,7 @@
 
-
-import { useState } from "react";
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
-import * as authService from './services/authService';
-import AuthContext from './context/authContext';
-import  {AuthProvider} from './context/authContext';
+import { AuthProvider } from './context/authContext';
 
 import Path from "./paths";
 
@@ -28,24 +24,17 @@ import BlogListMy from './components/blog-list/BlogListMy';
 import RezepteListMy from './components/rezepte-list/RezepteListMy';
 import About from './components/about/About';
 
-
-
-
-
-
-
-
 function App() {
- 
-  function clearLocalStorage(){
-    let firstTime= 1;
-    if(firstTime = 1){
-        localStorage.removeItem('accessToken', 'auth');
-        firstTime++;
-    }
-}
 
-clearLocalStorage();
+  function clearLocalStorage() {
+    let firstTime = 1;
+    if (firstTime = 1) {
+      localStorage.removeItem('accessToken', 'auth');
+      firstTime++;
+    }
+  }
+
+  clearLocalStorage();
 
 
   return (
@@ -56,28 +45,24 @@ clearLocalStorage();
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/blog' element={<BlogList />} />
-          
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/blog/:blogId' element={<BlogDetails />} />
           <Route path='/rezepte' element={<RezepteList />} />
           <Route path='/rezepte/:rezepteId' element={<RezepteDetails />} />
-          
           <Route element={<AuthGuard />}>
-          <Route path='/blog/create' element={<BlogCreate />} />
-<Route path={Path.BlogEdit} element={<BlogEdit />} />
-<Route path='/rezepte/create' element={<RezepteCreate />} />
-<Route path={Path.RezepteEdit} element={<RezepteEdit />} />
-<Route path='/blog/my' element={<BlogListMy />} />
-<Route path='/rezepte/my' element={<RezepteListMy />} />
-          <Route path={Path.Logout} element={<Logout />} />
+            <Route path='/blog/create' element={<BlogCreate />} />
+            <Route path={Path.BlogEdit} element={<BlogEdit />} />
+            <Route path='/rezepte/create' element={<RezepteCreate />} />
+            <Route path={Path.RezepteEdit} element={<RezepteEdit />} />
+            <Route path='/blog/my' element={<BlogListMy />} />
+            <Route path='/rezepte/my' element={<RezepteListMy />} />
+            <Route path={Path.Logout} element={<Logout />} />
           </Route>
         </Routes>
         <Footer />
-
       </div>
-      </AuthProvider >
-
+    </AuthProvider >
   )
 }
 

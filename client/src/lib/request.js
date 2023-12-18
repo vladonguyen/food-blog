@@ -1,9 +1,5 @@
-import logoutHandler from '../context/authContext';
 
-
-
-
- const request = async (method, url, data, token) => {
+const request = async (method, url, data, token) => {
 
     const buildOptions = (data) => {
         const options = {};

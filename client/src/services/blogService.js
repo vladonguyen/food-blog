@@ -1,23 +1,16 @@
-import * as request  from "../lib/request";
-
-
-
+import * as request from "../lib/request";
 
 const baseUrl = 'http://localhost:3030/data/blog';
 
-
-
 export const getAll = async () => {
-const result = await request.get(`${baseUrl}?sortBy=date`);
-return result
+    const result = await request.get(`${baseUrl}?sortBy=date`);
+    return result
 };
-
 
 export const getAllMyBlog = async (ownerId) => {
     const result = await request.get(`${baseUrl}?sortBy=date&where=_ownerId%3D%22${ownerId}%22`);
     return result
-    };
-
+};
 
 export const getOne = async (blogId) => {
     const result = await request.get(`${baseUrl}/${blogId}`);
@@ -28,9 +21,7 @@ export const getLastTwo = async () => {
     const result = await request.get(`${baseUrl}?sortBy=date&pageSize=2`);
     console.log(result)
     return result;
-    };
-
-
+};
 
 export const create = async (blogData, token) => {
     const result = await request.post(baseUrl, blogData, token);
@@ -45,7 +36,7 @@ export const edit = async (blogId, blogData, token) => {
 }
 
 export const remove = async (blogId, token) => {
-    const result =   request.remove(`${baseUrl}/${blogId}`, null, token);
-  
-      return result;
-  }
+    const result = request.remove(`${baseUrl}/${blogId}`, null, token);
+
+    return result;
+}

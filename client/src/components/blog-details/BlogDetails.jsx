@@ -10,13 +10,9 @@ import reducer from "./commentReducer";
 import useForm from "../../hooks/useForm";
 import { pathToUrl } from "../utils/pathUtils";
 import Path from "../../paths";
-import BlogEdit from "../blog-edit/BlogEdit";
 
 import { hasEmptyValues } from '../utils/validationUtils';
-import { transformDateFormat } from '../utils/trasnsormDate';
 import DOMPurify from 'dompurify';
-
-
 
 export default function BlogDetails() {
   const { token } = useContext(AuthContext);
@@ -27,10 +23,8 @@ export default function BlogDetails() {
   const { blogId } = useParams();
   const navigate = useNavigate();
 
-  
-
-  const {isCommentError } = useContext(AuthContext);
-    const { setCommentError } = useContext(AuthContext);
+  const { isCommentError } = useContext(AuthContext);
+  const { setCommentError } = useContext(AuthContext);
 
   useEffect(() => {
     blogService.getOne(blogId)
@@ -50,9 +44,9 @@ export default function BlogDetails() {
 
     setCommentError(false);
     if (hasEmptyValues(values, setCommentError)) {
-      
+
       throw Error('All fields must be filled!');
-  }
+    }
 
     const newComment = await commentService.create(
       blogId,
@@ -118,12 +112,12 @@ export default function BlogDetails() {
                 <div className="single-blog-area mb-80">
                   <div className="blog-thumbnail">
                     <img src={blog.imageUrl} alt="" />
-                 
+
                   </div>
                   {/* Content */}
-                 
+
                   <div className="blog-content">
-                  {blog.date} 
+                    {blog.date}
                     <h1>  {blog.title}</h1>
 
                     <div className="meta-data">
@@ -131,10 +125,10 @@ export default function BlogDetails() {
 
                     </div>
 
-            
 
-                      {/* Sanitize and render HTML main content */}
-        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.articleContent) }} />
+
+                    {/* Sanitize and render HTML main content */}
+                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.articleContent) }} />
 
 
 
@@ -213,7 +207,7 @@ export default function BlogDetails() {
                                     />
                                   </div>
                                   <div className="col-12">
-                                  {isCommentError && <div className='commentErrorMess'>{isCommentError.message}</div>}
+                                    {isCommentError && <div className='commentErrorMess'>{isCommentError.message}</div>}
                                     <button className="btn delicious-btn mt-30 centerCommBtn" type="submit">
                                       Post Comment
                                     </button>

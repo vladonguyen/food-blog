@@ -28,11 +28,6 @@ rezepteService.getAll()
         </div>
         {/* ##### Breadcumb Area End ##### */}
 
-       
-
-        
-        
-
         <>
         <section className="best-receipe-area">
           <div className="container">
@@ -53,22 +48,12 @@ rezepteService.getAll()
           </div>
         </section>
        
-</>
-
-
-       
-   
-      
+</>   
  {/* <!-- Display paragraph: If there is no posts  --> */}
        {rezeptePosts. length === 0 && (
         <h3 className="no-articles">No articles yet</h3>
-       )}
-       
-        
+       )}    
       </>
-      
-        
-        </>
-       
+        </>    
     )
 }

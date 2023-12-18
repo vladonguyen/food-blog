@@ -4,9 +4,6 @@ import { useContext } from 'react';
 import { NavLink, Link} from 'react-router-dom';
 import AuthContext from '../../../context/authContext';
 
-
-
-
 export default function NavMenu() {
   const {
     isAuthenticated,
