@@ -8,6 +8,7 @@ import useForm from "../../hooks/useForm";
 import { pathToUrl } from "../utils/pathUtils";
 import Path from "../../paths";
 import RezepteEdit from "../rezepte-edit/RezepteEdit";
+import DOMPurify from 'dompurify';
 
 
 export default function rezepteDetails() {
@@ -92,19 +93,11 @@ export default function rezepteDetails() {
               <div className="single-preparation-step d-flex">
 
                 <p>
-                  {rezepte.recipeContent}
+                  
+                                       {/* Sanitize and render HTML content */}
+        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(rezepte.recipeContent) }} />
                 </p>
-                {userId === rezepte._ownerId && (
-                    <aside>
-                    <Link to={pathToUrl(Path.RezepteEdit, { rezepteId })} className="editBtn btn delicious-btn mt-30">EDIT</Link>
-                    <button className="deleteBtn btn delicious-btn mt-30" onClick={deleteButtonClickHandler}>DELETE</button>
-                    </aside>
-                )}
-
-                
-                   
-
-                    {/* ##### Edit/Delete buttons end ##### */}
+      
               </div>
 
             </div>
@@ -133,6 +126,18 @@ export default function rezepteDetails() {
 
               </div>
             </div>
+                       {/* ##### Edit/Delete buttons start ##### */}
+                       {userId === rezepte._ownerId && (
+                    <aside>
+                    <Link to={pathToUrl(Path.RezepteEdit, { rezepteId })} className="editBtn btn delicious-btn mt-30">EDIT</Link>
+                    <button className="deleteBtn btn delicious-btn mt-30" onClick={deleteButtonClickHandler}>DELETE</button>
+                    </aside>
+                )}
+
+                
+                   
+
+                    {/* ##### Edit/Delete buttons end ##### */}
           </div>
 
         </div>

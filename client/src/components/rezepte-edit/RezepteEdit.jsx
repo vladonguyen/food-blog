@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../../context/authContext';
 
+import { Editor } from 'primereact/editor';
+import DOMPurify from 'dompurify';
+
 import { hasEmptyValues } from '../utils/validationUtils';
 
 export default function RezepteEdit(){
@@ -16,19 +19,26 @@ export default function RezepteEdit(){
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
     const {rezepteId} = useParams();
+    const [mainText, setText]= useState('');
     const [rezepte, setRezepte] = useState({
-        title: '',
-        category: '',
-        maxLevel: '',
-        imageUrl: '',
-        imageUrlHome: '',
-        summary: '',
+title: '',
+prepTime: '',
+cookTime: '',
+servings: '',
+ingredients: '',
+imageUrl: '',
+imageUrlHome: '',
+recipeContent: '',
+date: '',
+authorName: '',
         
     });
     useEffect(()=> {
         rezepteService.getOne(rezepteId)
         .then(result => {
             setRezepte(result);
+            setText(result.recipeContent)
+
         })
     }, [rezepteId])
     const editRezepteSubmitHandler = async (e) => {
@@ -41,8 +51,9 @@ console.log(values)
             if (hasEmptyValues(values, setEditRezepteError)) {
                 throw Error('All fields must be filled!');
             }
+            const sanitizedMainText = DOMPurify.sanitize(mainText);
 
-            await rezepteService.edit(rezepteId, values, token);
+            await rezepteService.edit(rezepteId, { ...values, recipeContent: sanitizedMainText }, token);
             navigate('/rezepte');
     
         } catch (err) {
@@ -90,9 +101,10 @@ console.log(values)
                     <input type="text" id="imageUrlHome" name="imageUrlHome" placeholder="Give home photo url..." value={rezepte.imageUrlHome} onChange={onChange} className="form-control"/>
 
 
-                    <label htmlFor="recipeContent">Recipe content:</label>
-                    <textarea name="recipeContent" id="recipeContent" value={rezepte.recipeContent} onChange={onChange} className="form-control"></textarea>
-
+                    {/* <label htmlFor="recipeContent">Recipe content:</label>
+                    <textarea name="recipeContent" id="recipeContent" value={rezepte.recipeContent} onChange={onChange} className="form-control"></textarea> */}
+<label htmlFor="recipeContent">Article full text:</label>
+<Editor value={mainText} onTextChange={(e) => setText(e.htmlValue)} className='richTextEditor' />
                   
 
                     <label htmlFor="date" >Publish date:</label>

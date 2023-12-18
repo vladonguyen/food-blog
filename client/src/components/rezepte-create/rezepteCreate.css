@@ -41,3 +41,23 @@
 .articleFullText{
     min-height: 200px;
 }
+
+.articleFullText{
+    min-height: 200px;
+    font-style: normal;
+}
+.ql-editor{
+    background-color: white;
+}
+
+.ql-editor p{
+    color: #000;
+}
+
+.richTextEditor.p-component.p-editor-container.richTextEditor {
+    display:grid;
+}
+
+.p-editor-content.ql-container.ql-snow{
+    height: 300px;
+}

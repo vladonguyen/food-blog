@@ -3,14 +3,20 @@ import '../rezepte-create/RezepteCreate.css'
 import { useNavigate } from 'react-router-dom'
 import *  as rezepteService from "../../services/rezepteService";
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '../../context/authContext';
+
+import { Editor } from 'primereact/editor';
+import DOMPurify from 'dompurify';
+
 import { hasEmptyValues } from '../utils/validationUtils';
 
 
 export default function RezepteCreate() {
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [mainText, setText]= useState('');
+
 
     const { isCreateRezepteError } = useContext(AuthContext);
     const { setCreateRezepteError } = useContext(AuthContext);
@@ -25,7 +31,10 @@ export default function RezepteCreate() {
                 throw Error('All fields must be filled!');
             }
 
-            await rezepteService.create(rezepteData, token);
+                 // Sanitize the HTML content before storing it
+                 const sanitizedMainText = DOMPurify.sanitize(mainText);
+
+            await rezepteService.create({...rezepteData, recipeContent: sanitizedMainText}, token);
             navigate('/rezepte');
 
         } catch (err) {
@@ -64,8 +73,11 @@ export default function RezepteCreate() {
                     <input type="text" id="imageUrlHome" name="imageUrlHome" placeholder="Size must be 500x500 (squire)" className="form-control"/>
 
 
-                    <label htmlFor="recipeContent" >Recipe content:</label>
-                    <textarea name="recipeContent" id="recipeContent" className="form-control articleFullText"></textarea>
+                    {/* <label htmlFor="recipeContent" >Recipe content:</label>
+                    <textarea name="recipeContent" id="recipeContent" className="form-control articleFullText"></textarea> */}
+
+                    <label htmlFor="recipeContent">Article full text:</label>
+<Editor value={mainText} onTextChange={(e) => setText(e.htmlValue)} className='richTextEditor' />
 
                   
 
