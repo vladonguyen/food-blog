@@ -1,28 +1,34 @@
-# Food blog
-This web SPA (Single Page App) is an project for a React JS Course in SoftUni. The topic and theme of the project are vegan blog with blog posts as well as recipes. There is a public part and pages that are accessible without authentication. After registration and login the user is able to create, edit and delete his/her own publications. They have also their own personal area, where can see their own blog posts and recipes as well as logout.
+# Vegan Blog SPA Documentation
 
-You can download the project code from my github repository 'food blog'. After you download the files, there are two main folders - client and server.
+This Single Page App (SPA) is a project developed as part of a **React JS Course** at SoftUni. The project revolves around a vegan blog featuring both blog posts and recipes. The application has public pages accessible without authentication, and users can register and log in to create, edit, and delete their own publications. Users also have a personal area where they can manage their blog posts and recipes.
 
-**Client**
-Frontend (client) is build using React JS+ Vite. In order to install and make it work, you need to have Node.js installed. If that step is done, you can open your IDE (preferably Visual Studio Code) and type the following line in your terminal (you might need first to go with command cd .\client\ in order to open client folder) :
-npm install 
+## Project Structure
 
-After installation of the project and all dependencies is done, please type:
+You can download the project code from the GitHub repository 'food-blog.' The project is organized into two main folders:
+
+### Client (Frontend)
+
+The frontend is built using React JS + Vite. To set up the client, ensure you have Node.js installed. Open your preferred IDE (preferably Visual Studio Code) and run the following commands in your terminal:
+
+```bash
+cd ./client/
+npm install
 npm run dev
-
+```
 This will start the client part of the SPA.
 
-**Server**
-The server is a modification of the Softuni Practice Server github repository. Please note that the seed data in it is modified as well as some validation options added. So use the server version in the project.
-In order to start the server you need to open new terminal in your IDE, to open the server folder ( cd .\server\). The command to start the server is:
-node .\server.js
-
-**Additional information:
-**
+### Server
+The server is a modification of the SoftUni Practice Server GitHub repository. Please note that the **seed data in it is modified as well as some validation options added. So use the server version in the project.** In order to start the server you need to open a new terminal in your IDE, to open the server folder. The command to start the server is:
+```bash
+cd ./server/
+node ./server.js
+```
+### Additional Information
 - The home page provides information about 2 blog posts and 6 recipes
-- In the recipe details page there is a possibility to check ingredients checkboxes serving as a shopping list
-- There is rich text editor for blog and recipe posts create  and edit. The html send with this editor is sanitized with dompurify component. 
+- In the recipe details page, there is a possibility to check ingredients checkboxes serving as a shopping list
+- There is a rich text editor for blog and recipe posts create and edit. The HTML sent with this editor is sanitized with dompurify component.
 - Delete is also possible after login.
-- There is basic server based login and register validation
-- There is a validation of creation of new posts and comments checking for missing/empty form fields
+- There is basic server-based login and register validation
+- There is validation of the creation of new posts and comments checking for missing/empty form fields
+
 
