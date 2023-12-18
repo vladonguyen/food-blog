@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../../context/authContext';
 
+import { Editor } from 'primereact/editor';
+import DOMPurify from 'dompurify';
+
 import { hasEmptyValues } from '../utils/validationUtils';
 
 export default function BlogEdit(){
@@ -16,6 +19,7 @@ export default function BlogEdit(){
 
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [mainText, setText]= useState('');
     const {blogId} = useParams();
     const [blog, setBlog] = useState({
         title: '',
@@ -29,7 +33,9 @@ export default function BlogEdit(){
     useEffect(()=> {
         blogService.getOne(blogId)
         .then(result => {
-            setBlog(result);
+            setBlog(result)
+            setText(result.articleContent)
+            ;
         })
     }, [blogId])
     const editBlogSubmitHandler = async (e) => {
@@ -42,7 +48,10 @@ console.log(values)
             if (hasEmptyValues(values, setEditBlogError)) {
                 throw Error('All fields must be filled!');
             }
-            await blogService.edit(blogId, values, token);
+            const sanitizedMainText = DOMPurify.sanitize(mainText);
+
+
+            await blogService.edit(blogId, { ...values, articleContent: sanitizedMainText }, token);
            
             navigate('/blog');
     
@@ -80,8 +89,11 @@ console.log(values)
                     <label htmlFor="desc">Short description:</label>
                     <textarea name="desc" id="desc"  className="form-control" value={blog.desc} onChange={onChange}></textarea>
 
-                    <label htmlFor="articleContent">Article full text:</label>
-                    <textarea name="articleContent" id="articleContent"  className="form-control articleFullText" value={blog.articleContent} onChange={onChange}></textarea>
+                    {/* <label htmlFor="articleContent">Article full text:</label>
+                    <textarea name="articleContent" id="articleContent"  className="form-control articleFullText" value={blog.articleContent} onChange={onChange}></textarea> */}
+
+<label htmlFor="articleContent">Article full text:</label>
+<Editor value={mainText} onTextChange={(e) => setText(e.htmlValue)} className='richTextEditor' />
 
                     <label htmlFor="date">Publish date:</label>
 

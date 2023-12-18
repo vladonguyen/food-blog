@@ -3,31 +3,38 @@ import '../blog-create/blogcreate.css'
 import { useNavigate } from 'react-router-dom'
 import *  as blogService from "../../services/blogService";
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '../../context/authContext';
 
+import { Editor } from 'primereact/editor';
+import DOMPurify from 'dompurify';
+
 import { hasEmptyValues } from '../utils/validationUtils';
+
+
 
 export default function BlogCreate() {
     const { token } = useContext(AuthContext);
     const { isCreateBlogError } = useContext(AuthContext);
     const { setCreateBlogError } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [mainText, setText]= useState('');
     const createBlogSubmitHandler = async (e) => {
         e.preventDefault();
         setCreateBlogError(false);
 
-   
+        
+
         const blogData = Object.fromEntries(new FormData(e.currentTarget));
         try {
 
             if (hasEmptyValues(blogData, setCreateBlogError)) {
                 throw Error('All fields must be filled!');
             }
+            // Sanitize the HTML content before storing it
+            const sanitizedMainText = DOMPurify.sanitize(mainText);
 
-
-
-            await blogService.create(blogData, token);
+            await blogService.create({ ...blogData, articleContent: sanitizedMainText }, token);
             navigate('/blog');
 
         } catch (error) {
@@ -53,8 +60,11 @@ export default function BlogCreate() {
                     <label htmlFor="desc">Short description:</label>
                     <textarea name="desc" id="desc" className="form-control"></textarea>
 
-                    <label htmlFor="articleContent">Article full text:</label>
-                    <textarea name="articleContent" id="articleContent" className="form-control articleFullText"></textarea>
+                    {/* <label htmlFor="articleContent">Article full text:</label>
+                    <textarea name="articleContent" id="articleContent" className="form-control articleFullText"></textarea> */}
+<label htmlFor="articleContent">Article full text:</label>
+<Editor value={mainText} onTextChange={(e) => setText(e.htmlValue)} className='richTextEditor' />
+
 
                     <label htmlFor="date">Publish date:</label>
 

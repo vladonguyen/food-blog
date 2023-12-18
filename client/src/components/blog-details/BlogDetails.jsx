@@ -14,9 +14,11 @@ import BlogEdit from "../blog-edit/BlogEdit";
 
 import { hasEmptyValues } from '../utils/validationUtils';
 import { transformDateFormat } from '../utils/trasnsormDate';
+import DOMPurify from 'dompurify';
 
 
-export default function blogDetails() {
+
+export default function BlogDetails() {
   const { token } = useContext(AuthContext);
   const { email, userId, isAuthenticated } = useContext(AuthContext);
   const [blog, setBlog] = useState({});
@@ -129,7 +131,11 @@ export default function blogDetails() {
 
                     </div>
 
-                    {blog.articleContent}
+                    {/* {blog.articleContent} */}
+
+                      {/* Sanitize and render HTML content */}
+        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.articleContent) }} />
+
 
 
                     {/* ##### Edit/Delete buttons start ##### */}
