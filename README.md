@@ -1,9 +1,9 @@
-# food blog
+# Food blog
 This web SPA (Single Page App) is an project for a React JS Course in SoftUni. The topic and theme of the project are vegan blog with blog posts as well as recipes. There is a public part and pages that are accessible without authentication. After registration and login the user is able to create, edit and delete his/her own publications. They have also their own personal area, where can see their own blog posts and recipes as well as logout.
 
 You can download the project code from my github repository 'food blog'. After you download the files, there are two main folders - client and server.
 
-Client
+<strong>Client</strong>
 Frontend (client) is build using React JS+ Vite. In order to install and make it work, you need to have Node.js installed. If that step is done, you can open your IDE (preferably Visual Studio Code) and type the following line in your terminal (you might need first to go with command cd .\client\ in order to open client folder) :
 npm install 
 
