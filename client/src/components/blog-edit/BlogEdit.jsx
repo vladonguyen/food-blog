@@ -7,23 +7,12 @@ import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../../context/authContext';
 
+import { hasEmptyValues } from '../utils/validationUtils';
+
 export default function BlogEdit(){
     const { isEditBlogError } = useContext(AuthContext);
     const { setEditBlogError } = useContext(AuthContext);
-
-    function hasEmptyValues(obj) {
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                if (!obj[key]) {
-                    setEditBlogError({ message: "All fields must be filed!" })
-                    return true; // Found an empty value
-                }
-            }
-        }
-        return false; // No empty values found
-    }
-  
-    
+   
 
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
@@ -45,11 +34,12 @@ export default function BlogEdit(){
     }, [blogId])
     const editBlogSubmitHandler = async (e) => {
         e.preventDefault();
+        setEditBlogError(false);
 
         const values = Object.fromEntries(new FormData(e.currentTarget));
 console.log(values)
         try {
-            if (hasEmptyValues(values)) {
+            if (hasEmptyValues(values, setEditBlogError)) {
                 throw Error('All fields must be filled!');
             }
             await blogService.edit(blogId, values, token);

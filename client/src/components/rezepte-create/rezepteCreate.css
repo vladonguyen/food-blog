@@ -1,0 +1,43 @@
+.createForm{
+    margin: 40px auto auto auto !important;
+    width: 30%;
+    min-width: 200px;
+    padding: 10px;
+}
+
+.createCenter {
+    margin: 0 auto;
+}
+
+.white{
+    color:white;
+}
+
+.createErrorMess{
+    display:inline;
+    color: rgb(219, 25, 25);
+    font-size: 16px;
+    font-weight:bold;
+    
+    margin: 40px auto auto  auto ;
+    text-align: center;
+    width: 100%;
+   
+}
+
+.createBtnCenter, .h1Center{
+    
+    display: flex !important;
+    justify-content: center !important;
+    margin: 40px auto auto  auto ;
+}
+
+.displayBlock{
+    display:block;
+    color: rgb(219, 25, 25);
+    
+}
+
+.articleFullText{
+    min-height: 200px;
+}

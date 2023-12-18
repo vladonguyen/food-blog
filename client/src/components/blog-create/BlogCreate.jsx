@@ -6,6 +6,8 @@ import *  as blogService from "../../services/blogService";
 import { useContext } from 'react';
 import AuthContext from '../../context/authContext';
 
+import { hasEmptyValues } from '../utils/validationUtils';
+
 export default function BlogCreate() {
     const { token } = useContext(AuthContext);
     const { isCreateBlogError } = useContext(AuthContext);
@@ -13,23 +15,13 @@ export default function BlogCreate() {
     const navigate = useNavigate();
     const createBlogSubmitHandler = async (e) => {
         e.preventDefault();
+        setCreateBlogError(false);
 
-        function hasEmptyValues(obj) {
-            for (const key in obj) {
-                if (obj.hasOwnProperty(key)) {
-                    if (!obj[key]) {
-                        setCreateBlogError({ message: "All fields must be filed!" })
-                        return true; // Found an empty value
-                    }
-                }
-            }
-            return false; // No empty values found
-        }
-
+   
         const blogData = Object.fromEntries(new FormData(e.currentTarget));
         try {
 
-            if (hasEmptyValues(blogData)) {
+            if (hasEmptyValues(blogData, setCreateBlogError)) {
                 throw Error('All fields must be filled!');
             }
 
