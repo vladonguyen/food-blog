@@ -25,5 +25,4 @@ Additional information:
 - Delete is also possible after login.
 - There is basic server based login and register validation
 - There is a validation of creation of new posts and comments checking for missing/empty form fields
-- 
 
