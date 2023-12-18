@@ -1,4 +1,4 @@
-import '../blog-details/blog-details.css'
+import '../blog-details/blog-details.css';
 
 import { useContext, useEffect, useMemo, useReducer, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -11,6 +11,7 @@ import { pathToUrl } from "../utils/pathUtils";
 import Path from "../../paths";
 import BlogEdit from "../blog-edit/BlogEdit";
 
+import { hasEmptyValues } from '../utils/validationUtils';
 
 
 export default function blogDetails() {
@@ -22,6 +23,8 @@ export default function blogDetails() {
   const { blogId } = useParams();
   const navigate = useNavigate();
 
+  const {isCommentError } = useContext(AuthContext);
+    const { setCommentError } = useContext(AuthContext);
 
   useEffect(() => {
     blogService.getOne(blogId)
@@ -38,6 +41,12 @@ export default function blogDetails() {
   }, [blogId]);
 
   const addCommentHandler = async (values) => {
+
+    setCommentError(false);
+    if (hasEmptyValues(values, setCommentError)) {
+      
+      throw Error('All fields must be filled!');
+  }
 
     const newComment = await commentService.create(
       blogId,
@@ -197,7 +206,8 @@ export default function blogDetails() {
                                     />
                                   </div>
                                   <div className="col-12">
-                                    <button className="btn delicious-btn mt-30" type="submit">
+                                  {isCommentError && <div className='commentErrorMess'>{isCommentError.message}</div>}
+                                    <button className="btn delicious-btn mt-30 centerCommBtn" type="submit">
                                       Post Comment
                                     </button>
                                   </div>
