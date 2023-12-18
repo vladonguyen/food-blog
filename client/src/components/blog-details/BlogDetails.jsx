@@ -131,9 +131,9 @@ export default function BlogDetails() {
 
                     </div>
 
-                    {/* {blog.articleContent} */}
+            
 
-                      {/* Sanitize and render HTML content */}
+                      {/* Sanitize and render HTML main content */}
         <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.articleContent) }} />
 
 

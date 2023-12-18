@@ -29,7 +29,6 @@ import logoutHandler from '../context/authContext';
 
 
     try {
-        console.log(token)
         const response = await fetch(url, {
             ...buildOptions(data),
             'X-Authorization': token,

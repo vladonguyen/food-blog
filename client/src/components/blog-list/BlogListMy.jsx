@@ -6,7 +6,7 @@ import AuthContext from "../../context/authContext";
 export default  function  BlogListMy(){
     const [blogPosts, setBlogPosts] = useState([]);
     const {userId} =  useContext(AuthContext);
-    console.log(userId)
+ 
     useEffect(()=>{
 blogService.getAllMyBlog(userId)
 .then(result => setBlogPosts(result));

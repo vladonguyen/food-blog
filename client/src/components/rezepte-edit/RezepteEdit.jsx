@@ -46,7 +46,7 @@ authorName: '',
         setEditRezepteError(false);
 
         const values = Object.fromEntries(new FormData(e.currentTarget));
-console.log(values)
+
         try {
             if (hasEmptyValues(values, setEditRezepteError)) {
                 throw Error('All fields must be filled!');
@@ -101,8 +101,7 @@ console.log(values)
                     <input type="text" id="imageUrlHome" name="imageUrlHome" placeholder="Give home photo url..." value={rezepte.imageUrlHome} onChange={onChange} className="form-control"/>
 
 
-                    {/* <label htmlFor="recipeContent">Recipe content:</label>
-                    <textarea name="recipeContent" id="recipeContent" value={rezepte.recipeContent} onChange={onChange} className="form-control"></textarea> */}
+     
 <label htmlFor="recipeContent">Article full text:</label>
 <Editor value={mainText} onTextChange={(e) => setText(e.htmlValue)} className='richTextEditor' />
                   

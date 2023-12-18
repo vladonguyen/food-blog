@@ -60,8 +60,7 @@ export default function BlogCreate() {
                     <label htmlFor="desc">Short description:</label>
                     <textarea name="desc" id="desc" className="form-control"></textarea>
 
-                    {/* <label htmlFor="articleContent">Article full text:</label>
-                    <textarea name="articleContent" id="articleContent" className="form-control articleFullText"></textarea> */}
+
 <label htmlFor="articleContent">Article full text:</label>
 <Editor value={mainText} onTextChange={(e) => setText(e.htmlValue)} className='richTextEditor' />
 

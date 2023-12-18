@@ -16,7 +16,6 @@ export const getAllMyRezepte = async (ownerId) => {
 
 export const getLastSix = async () => {
     const result = await request.get(`${baseUrl}?sortBy=date&pageSize=6`);
-    console.log(result)
     return result;
     };
 

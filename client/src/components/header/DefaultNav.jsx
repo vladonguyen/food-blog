@@ -159,10 +159,7 @@ export default function DefaultNav(){
                                         </ul>
                                     </li>
                    </ul>
-                   {/* Newsletter Form */}
-                   {/* <div className="search-btn">
-                     <i className="fa fa-search" aria-hidden="true" />
-                   </div> */}
+       
                  </div>
                  {/* Nav End */}
                </div>

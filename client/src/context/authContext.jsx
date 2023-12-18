@@ -51,7 +51,6 @@ export const AuthProvider = ({
       try {
         setRegError(false);
         const result = await authService.register(values.email, values.username, values.password, values.confirmPassword);
-        console.log(result,'registerSubmitHandler' );
       setAuth(result);
       // localStorage.setItem('accessToken', result.accessToken);
   

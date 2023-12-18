@@ -89,8 +89,7 @@ export default function BlogEdit(){
                     <label htmlFor="desc">Short description:</label>
                     <textarea name="desc" id="desc"  className="form-control" value={blog.desc} onChange={onChange}></textarea>
 
-                    {/* <label htmlFor="articleContent">Article full text:</label>
-                    <textarea name="articleContent" id="articleContent"  className="form-control articleFullText" value={blog.articleContent} onChange={onChange}></textarea> */}
+             
 
 <label htmlFor="articleContent">Article full text:</label>
 <Editor value={mainText} onTextChange={(e) => setText(e.htmlValue)} className='richTextEditor' />
