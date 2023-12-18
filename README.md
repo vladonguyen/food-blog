@@ -3,7 +3,7 @@ This web SPA (Single Page App) is an project for a React JS Course in SoftUni. T
 
 You can download the project code from my github repository 'food blog'. After you download the files, there are two main folders - client and server.
 
-<strong>Client</strong>
+Client
 Frontend (client) is build using React JS+ Vite. In order to install and make it work, you need to have Node.js installed. If that step is done, you can open your IDE (preferably Visual Studio Code) and type the following line in your terminal (you might need first to go with command cd .\client\ in order to open client folder) :
 npm install 
 
