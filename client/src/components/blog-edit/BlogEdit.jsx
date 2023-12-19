@@ -12,14 +12,18 @@ import DOMPurify from 'dompurify';
 
 import { hasEmptyValues } from '../utils/validationUtils';
 
+
+
 export default function BlogEdit(){
     const { isEditBlogError } = useContext(AuthContext);
     const { setEditBlogError } = useContext(AuthContext);
    
+    const { mainText } = useContext(AuthContext);
+    const { setText } = useContext(AuthContext);
 
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
-    const [mainText, setText]= useState('');
+    
     const {blogId} = useParams();
     const [blog, setBlog] = useState({
         title: '',
@@ -33,7 +37,7 @@ export default function BlogEdit(){
     useEffect(()=> {
         blogService.getOne(blogId)
         .then(result => {
-            setBlog(result)
+            setBlog(result);
             setText(result.articleContent);
             
         })

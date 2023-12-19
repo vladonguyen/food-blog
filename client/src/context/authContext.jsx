@@ -20,6 +20,7 @@ export const AuthProvider = ({
   const [isCreateRezepteError, setCreateRezepteError] = useState(false);
   const [isEditRezepteError, setEditRezepteError] = useState(false);
   const [isCommentError, setCommentError] = useState(false);
+  const [mainText, setText]= useState('');
 
   const loginSubmitHandler = async (values) => {
 
@@ -88,7 +89,9 @@ export const AuthProvider = ({
     isEditRezepteError,
     setEditRezepteError,
     isCommentError,
-    setCommentError
+    setCommentError,
+    mainText,
+    setText
   }
 
   return (
