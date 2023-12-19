@@ -3,12 +3,12 @@ import * as request from "../lib/request";
 const baseUrl = 'http://localhost:3030/data/blog';
 
 export const getAll = async () => {
-    const result = await request.get(`${baseUrl}?sortBy=date`);
+    const result = await request.get(`${baseUrl}?sortBy=_createdOn%20desc`);
     return result
 };
 
 export const getAllMyBlog = async (ownerId) => {
-    const result = await request.get(`${baseUrl}?sortBy=date&where=_ownerId%3D%22${ownerId}%22`);
+    const result = await request.get(`${baseUrl}?sortBy=_createdOn%20desc&where=_ownerId%3D%22${ownerId}%22`);
     return result
 };
 
@@ -18,7 +18,7 @@ export const getOne = async (blogId) => {
 }
 
 export const getLastTwo = async () => {
-    const result = await request.get(`${baseUrl}?sortBy=date&pageSize=2`);
+    const result = await request.get(`${baseUrl}?sortBy=_createdOn%20desc&pageSize=2`);
     console.log(result)
     return result;
 };
