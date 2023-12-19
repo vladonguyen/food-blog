@@ -30,7 +30,7 @@ export default function Footer(){
           {/* Footer Logo */}
           <div className="footer-logo">
             <Link to="/">
-              <img src="img/core-img/logo.png" alt="" />
+              <img src="/img/core-img/logo.png" alt="" />
             </Link>
           </div>
           {/* Copywrite */}
