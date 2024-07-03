@@ -2,6 +2,9 @@
 
 This Single Page App (SPA) is a project developed as part of a **React JS Course** at SoftUni. The project revolves around a vegan blog featuring both blog posts and recipes. The application has public pages accessible without authentication, and users can register and log in to create, edit, and delete their own publications. Users also have a personal area where they can manage their blog posts and recipes.
 
+# Live Website
+This SPA is deployed on Firebase and is live at [https://food-blog-react-exam.web.app/](https://food-blog-react-exam.web.app/).
+
 ## Project Structure
 
 You can download the project code from the GitHub repository 'food-blog.' The project is organized into two main folders:
